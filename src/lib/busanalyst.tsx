@@ -201,8 +201,10 @@ export function BusAnalystProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo<Store>(() => {
-    const activeBusiness =
-      businesses.find((b) => b.id === activeBusinessId) ?? businesses[0] ?? DEFAULT_BUSINESSES[0];
+    const activeBusiness: Business =
+      businesses.find((b) => b.id === activeBusinessId) ??
+      businesses[0] ??
+      (DEFAULT_BUSINESSES[0] as Business);
     return {
       ready,
       businesses,
