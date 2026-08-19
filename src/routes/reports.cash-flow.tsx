@@ -24,7 +24,7 @@ export const Route = createFileRoute("/reports/cash-flow")({
       { property: "og:description", content: "Where your money came in and where it went out." },
     ],
   }),
-  component: CashFlow;
+  component: CashFlow,
 });
 
 function CashFlow() {
