@@ -10,6 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BusinessesRouteImport } from './routes/businesses'
+import { Route as InsightRouteImport } from './routes/insight'
+import { Route as MoreRouteImport } from './routes/more'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as ReportsIndexRouteImport } from './routes/reports.index'
@@ -19,6 +23,26 @@ import { Route as ReportsProfitLossRouteImport } from './routes/reports.profit-l
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BusinessesRoute = BusinessesRouteImport.update({
+  id: '/businesses',
+  path: '/businesses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsightRoute = InsightRouteImport.update({
+  id: '/insight',
+  path: '/insight',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MoreRoute = MoreRouteImport.update({
+  id: '/more',
+  path: '/more',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReportsRoute = ReportsRouteImport.update({
@@ -49,6 +73,10 @@ const ReportsProfitLossRoute = ReportsProfitLossRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/businesses': typeof BusinessesRoute
+  '/insight': typeof InsightRoute
+  '/more': typeof MoreRoute
+  '/onboarding': typeof OnboardingRoute
   '/reports': typeof ReportsRouteWithChildren
   '/transactions': typeof TransactionsRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
@@ -57,6 +85,10 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/businesses': typeof BusinessesRoute
+  '/insight': typeof InsightRoute
+  '/more': typeof MoreRoute
+  '/onboarding': typeof OnboardingRoute
   '/transactions': typeof TransactionsRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
@@ -65,6 +97,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/businesses': typeof BusinessesRoute
+  '/insight': typeof InsightRoute
+  '/more': typeof MoreRoute
+  '/onboarding': typeof OnboardingRoute
   '/reports': typeof ReportsRouteWithChildren
   '/transactions': typeof TransactionsRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
@@ -75,6 +111,10 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/businesses'
+    | '/insight'
+    | '/more'
+    | '/onboarding'
     | '/reports'
     | '/transactions'
     | '/reports/cash-flow'
@@ -83,6 +123,10 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/businesses'
+    | '/insight'
+    | '/more'
+    | '/onboarding'
     | '/transactions'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
@@ -90,6 +134,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/businesses'
+    | '/insight'
+    | '/more'
+    | '/onboarding'
     | '/reports'
     | '/transactions'
     | '/reports/cash-flow'
@@ -99,6 +147,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BusinessesRoute: typeof BusinessesRoute
+  InsightRoute: typeof InsightRoute
+  MoreRoute: typeof MoreRoute
+  OnboardingRoute: typeof OnboardingRoute
   ReportsRoute: typeof ReportsRouteWithChildren
   TransactionsRoute: typeof TransactionsRoute
 }
@@ -110,6 +162,34 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/businesses': {
+      id: '/businesses'
+      path: '/businesses'
+      fullPath: '/businesses'
+      preLoaderRoute: typeof BusinessesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insight': {
+      id: '/insight'
+      path: '/insight'
+      fullPath: '/insight'
+      preLoaderRoute: typeof InsightRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/more': {
+      id: '/more'
+      path: '/more'
+      fullPath: '/more'
+      preLoaderRoute: typeof MoreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reports': {
@@ -167,6 +247,10 @@ const ReportsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BusinessesRoute: BusinessesRoute,
+  InsightRoute: InsightRoute,
+  MoreRoute: MoreRoute,
+  OnboardingRoute: OnboardingRoute,
   ReportsRoute: ReportsRouteWithChildren,
   TransactionsRoute: TransactionsRoute,
 }
