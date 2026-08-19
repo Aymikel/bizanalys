@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as ReportsIndexRouteImport } from './routes/reports.index'
+import { Route as ReportsCashFlowRouteImport } from './routes/reports.cash-flow'
+import { Route as ReportsProfitLossRouteImport } from './routes/reports.profit-loss'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,16 +36,30 @@ const ReportsIndexRoute = ReportsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ReportsRoute,
 } as any)
+const ReportsCashFlowRoute = ReportsCashFlowRouteImport.update({
+  id: '/cash-flow',
+  path: '/cash-flow',
+  getParentRoute: () => ReportsRoute,
+} as any)
+const ReportsProfitLossRoute = ReportsProfitLossRouteImport.update({
+  id: '/profit-loss',
+  path: '/profit-loss',
+  getParentRoute: () => ReportsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/reports': typeof ReportsRouteWithChildren
   '/transactions': typeof TransactionsRoute
+  '/reports/cash-flow': typeof ReportsCashFlowRoute
+  '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/reports/': typeof ReportsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/transactions': typeof TransactionsRoute
+  '/reports/cash-flow': typeof ReportsCashFlowRoute
+  '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/reports': typeof ReportsIndexRoute
 }
 export interface FileRoutesById {
@@ -51,14 +67,34 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/reports': typeof ReportsRouteWithChildren
   '/transactions': typeof TransactionsRoute
+  '/reports/cash-flow': typeof ReportsCashFlowRoute
+  '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/reports/': typeof ReportsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/reports' | '/transactions' | '/reports/'
+  fullPaths:
+    | '/'
+    | '/reports'
+    | '/transactions'
+    | '/reports/cash-flow'
+    | '/reports/profit-loss'
+    | '/reports/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/transactions' | '/reports'
-  id: '__root__' | '/' | '/reports' | '/transactions' | '/reports/'
+  to:
+    | '/'
+    | '/transactions'
+    | '/reports/cash-flow'
+    | '/reports/profit-loss'
+    | '/reports'
+  id:
+    | '__root__'
+    | '/'
+    | '/reports'
+    | '/transactions'
+    | '/reports/cash-flow'
+    | '/reports/profit-loss'
+    | '/reports/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -97,14 +133,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReportsIndexRouteImport
       parentRoute: typeof ReportsRoute
     }
+    '/reports/cash-flow': {
+      id: '/reports/cash-flow'
+      path: '/cash-flow'
+      fullPath: '/reports/cash-flow'
+      preLoaderRoute: typeof ReportsCashFlowRouteImport
+      parentRoute: typeof ReportsRoute
+    }
+    '/reports/profit-loss': {
+      id: '/reports/profit-loss'
+      path: '/profit-loss'
+      fullPath: '/reports/profit-loss'
+      preLoaderRoute: typeof ReportsProfitLossRouteImport
+      parentRoute: typeof ReportsRoute
+    }
   }
 }
 
 interface ReportsRouteChildren {
+  ReportsCashFlowRoute: typeof ReportsCashFlowRoute
+  ReportsProfitLossRoute: typeof ReportsProfitLossRoute
   ReportsIndexRoute: typeof ReportsIndexRoute
 }
 
 const ReportsRouteChildren: ReportsRouteChildren = {
+  ReportsCashFlowRoute: ReportsCashFlowRoute,
+  ReportsProfitLossRoute: ReportsProfitLossRoute,
   ReportsIndexRoute: ReportsIndexRoute,
 }
 
