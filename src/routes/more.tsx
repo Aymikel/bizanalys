@@ -57,10 +57,10 @@ const GROUPS = [
       { label: "Export data", icon: Download },
       { label: "Settings", icon: Settings },
       { label: "Help & support", icon: LifeBuoy },
-      { label: "Log out", icon: LogOut },
     ],
   },
 ];
+
 
 function MorePage() {
   const { activeBusiness } = useBusAnalyst();

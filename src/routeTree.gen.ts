@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BusinessesRouteImport } from './routes/businesses'
 import { Route as InsightRouteImport } from './routes/insight'
@@ -17,6 +18,7 @@ import { Route as MoreRouteImport } from './routes/more'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as TransactionsRouteImport } from './routes/transactions'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as ReportsIndexRouteImport } from './routes/reports.index'
 import { Route as ReportsCashFlowRouteImport } from './routes/reports.cash-flow'
 import { Route as ReportsProfitLossRouteImport } from './routes/reports.profit-loss'
@@ -24,6 +26,10 @@ import { Route as ReportsProfitLossRouteImport } from './routes/reports.profit-l
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -61,6 +67,11 @@ const TransactionsRoute = TransactionsRouteImport.update({
   path: '/transactions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const ReportsIndexRoute = ReportsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -86,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/reports': typeof ReportsRouteWithChildren
   '/transactions': typeof TransactionsRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/reports/': typeof ReportsIndexRoute
@@ -98,6 +110,7 @@ export interface FileRoutesByTo {
   '/more': typeof MoreRoute
   '/onboarding': typeof OnboardingRoute
   '/transactions': typeof TransactionsRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/reports': typeof ReportsIndexRoute
@@ -105,6 +118,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/businesses': typeof BusinessesRoute
   '/insight': typeof InsightRoute
@@ -112,6 +126,7 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/reports': typeof ReportsRouteWithChildren
   '/transactions': typeof TransactionsRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/reports/': typeof ReportsIndexRoute
@@ -127,6 +142,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/reports'
     | '/transactions'
+    | '/profile'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
     | '/reports/'
@@ -139,12 +155,14 @@ export interface FileRouteTypes {
     | '/more'
     | '/onboarding'
     | '/transactions'
+    | '/profile'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
     | '/reports'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/auth'
     | '/businesses'
     | '/insight'
@@ -152,6 +170,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/reports'
     | '/transactions'
+    | '/_authenticated/profile'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
     | '/reports/'
@@ -159,6 +178,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   BusinessesRoute: typeof BusinessesRoute
   InsightRoute: typeof InsightRoute
@@ -175,6 +195,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -226,6 +253,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TransactionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/reports/': {
       id: '/reports/'
       path: '/'
@@ -250,6 +284,17 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 interface ReportsRouteChildren {
   ReportsCashFlowRoute: typeof ReportsCashFlowRoute
   ReportsProfitLossRoute: typeof ReportsProfitLossRoute
@@ -267,6 +312,7 @@ const ReportsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   BusinessesRoute: BusinessesRoute,
   InsightRoute: InsightRoute,
