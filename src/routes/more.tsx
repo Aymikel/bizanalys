@@ -1,4 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import {
   Building2,
   Users,
@@ -15,6 +17,9 @@ import {
 } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { useBusAnalyst } from "@/lib/busanalyst";
+import { useSession, displayName } from "@/lib/auth";
+import { supabase } from "@/integrations/supabase/client";
+
 
 export const Route = createFileRoute("/more")({
   head: () => ({
