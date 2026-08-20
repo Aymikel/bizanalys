@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { WELCOME_KEY } from "./welcome";
+import { WELCOME_KEY } from "@/lib/welcome";
 
 import { Bell, ChevronDown, Sparkles, User } from "lucide-react";
 import {

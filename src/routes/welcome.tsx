@@ -1,5 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { WELCOME_KEY } from "@/lib/welcome";
 
 export const Route = createFileRoute("/welcome")({
   head: () => ({
@@ -19,8 +20,6 @@ export const Route = createFileRoute("/welcome")({
   }),
   component: Welcome,
 });
-
-export const WELCOME_KEY = "ba-welcome-seen";
 
 function Welcome() {
   const navigate = useNavigate();
