@@ -18,6 +18,7 @@ import { Route as MoreRouteImport } from './routes/more'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as TransactionsRouteImport } from './routes/transactions'
+import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as ReportsIndexRouteImport } from './routes/reports.index'
 import { Route as ReportsCashFlowRouteImport } from './routes/reports.cash-flow'
@@ -67,6 +68,11 @@ const TransactionsRoute = TransactionsRouteImport.update({
   path: '/transactions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WelcomeRoute = WelcomeRouteImport.update({
+  id: '/welcome',
+  path: '/welcome',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/reports': typeof ReportsRouteWithChildren
   '/transactions': typeof TransactionsRoute
+  '/welcome': typeof WelcomeRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/more': typeof MoreRoute
   '/onboarding': typeof OnboardingRoute
   '/transactions': typeof TransactionsRoute
+  '/welcome': typeof WelcomeRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
@@ -126,6 +134,7 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/reports': typeof ReportsRouteWithChildren
   '/transactions': typeof TransactionsRoute
+  '/welcome': typeof WelcomeRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
@@ -142,6 +151,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/reports'
     | '/transactions'
+    | '/welcome'
     | '/profile'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
     | '/more'
     | '/onboarding'
     | '/transactions'
+    | '/welcome'
     | '/profile'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
@@ -170,6 +181,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/reports'
     | '/transactions'
+    | '/welcome'
     | '/_authenticated/profile'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
@@ -186,6 +198,7 @@ export interface RootRouteChildren {
   OnboardingRoute: typeof OnboardingRoute
   ReportsRoute: typeof ReportsRouteWithChildren
   TransactionsRoute: typeof TransactionsRoute
+  WelcomeRoute: typeof WelcomeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -251,6 +264,13 @@ declare module '@tanstack/react-router' {
       path: '/transactions'
       fullPath: '/transactions'
       preLoaderRoute: typeof TransactionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/welcome': {
+      id: '/welcome'
+      path: '/welcome'
+      fullPath: '/welcome'
+      preLoaderRoute: typeof WelcomeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/profile': {
@@ -320,6 +340,7 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingRoute: OnboardingRoute,
   ReportsRoute: ReportsRouteWithChildren,
   TransactionsRoute: TransactionsRoute,
+  WelcomeRoute: WelcomeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,5 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { WELCOME_KEY } from "@/lib/welcome";
+
 import { Bell, ChevronDown, Sparkles, User } from "lucide-react";
 import {
   Area,
@@ -47,6 +49,25 @@ export const Route = createFileRoute("/")({
 function Dashboard() {
   const { transactions, activeBusiness } = useBusAnalyst();
   const [range, setRange] = useState(7);
+  const navigate = useNavigate();
+  const [gateChecked, setGateChecked] = useState(false);
+
+  useEffect(() => {
+    let seen = false;
+    try {
+      seen = localStorage.getItem(WELCOME_KEY) === "1";
+    } catch {
+      seen = true;
+    }
+    if (!seen) {
+      navigate({ to: "/welcome", replace: true });
+      return;
+    }
+    setGateChecked(true);
+  }, [navigate]);
+
+  if (!gateChecked) return null;
+
 
   const today = dayTotals(transactions, todayISO());
   const yesterdayDate = new Date();
