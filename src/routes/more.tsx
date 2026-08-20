@@ -151,6 +151,16 @@ function MorePage() {
           </section>
         ))}
       </div>
+
+      {user && (
+        <button
+          onClick={signOut}
+          className="card-surface mt-5 flex min-h-11 w-full items-center justify-center gap-2 p-3 text-sm font-semibold text-rust-500"
+        >
+          <LogOut className="h-4 w-4" aria-hidden /> Log out
+        </button>
+      )}
     </AppShell>
+
   );
 }
