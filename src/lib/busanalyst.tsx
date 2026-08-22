@@ -125,6 +125,7 @@ function seedTransactions(): Transaction[] {
 
 type Store = {
   ready: boolean;
+  isGuest: boolean;
   businesses: Business[];
   activeBusinessId: string;
   activeBusiness: Business;
@@ -142,34 +143,54 @@ type Store = {
 const StoreContext = createContext<Store | null>(null);
 const KEY = "busanalyst.v1";
 
+export const GUEST_BUSINESS: Business = { id: "guest", name: "No business yet", type: "Guest" };
+
 export function BusAnalystProvider({ children }: { children: ReactNode }) {
+  const { user, loading: authLoading } = useSession();
+  const isGuest = !user;
+  const storageKey = user ? `${KEY}:${user.id}` : null;
+
   const [ready, setReady] = useState(false);
-  const [businesses, setBusinesses] = useState<Business[]>(DEFAULT_BUSINESSES);
+  const [businesses, setBusinesses] = useState<Business[]>([]);
   const [activeBusinessId, setActiveBusinessId] = useState("b1");
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [entrySheetOpen, setEntrySheetOpen] = useState(false);
 
   useEffect(() => {
+    if (authLoading) return;
+    setReady(false);
+    if (!storageKey) {
+      // Guests get a clean slate — no business, no demo data.
+      setBusinesses([]);
+      setTransactions([]);
+      setActiveBusinessId("guest");
+      setReady(true);
+      return;
+    }
     try {
-      const raw = localStorage.getItem(KEY);
+      const raw = localStorage.getItem(storageKey) ?? localStorage.getItem(KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
         setBusinesses(parsed.businesses ?? DEFAULT_BUSINESSES);
         setActiveBusinessId(parsed.activeBusinessId ?? "b1");
         setTransactions(parsed.transactions ?? seedTransactions());
       } else {
+        setBusinesses(DEFAULT_BUSINESSES);
+        setActiveBusinessId("b1");
         setTransactions(seedTransactions());
       }
     } catch {
+      setBusinesses(DEFAULT_BUSINESSES);
       setTransactions(seedTransactions());
     }
     setReady(true);
-  }, []);
+  }, [authLoading, storageKey]);
 
   useEffect(() => {
-    if (!ready) return;
-    localStorage.setItem(KEY, JSON.stringify({ businesses, activeBusinessId, transactions }));
-  }, [ready, businesses, activeBusinessId, transactions]);
+    if (!ready || !storageKey) return;
+    localStorage.setItem(storageKey, JSON.stringify({ businesses, activeBusinessId, transactions }));
+  }, [ready, storageKey, businesses, activeBusinessId, transactions]);
+
 
   const addTransaction = useCallback<Store["addTransaction"]>(
     (tx) => {
