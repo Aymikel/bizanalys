@@ -21,7 +21,7 @@ import { useSession, displayName } from "@/lib/auth";
 import { supabase } from "@/integrations/supabase/client";
 
 
-export const Route = createFileRoute("/more")({
+export const Route = createFileRoute("/more/")({
   head: () => ({
     meta: [
       { title: "More & Settings — BusAnalyst" },
