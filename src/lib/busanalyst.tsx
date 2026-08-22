@@ -7,6 +7,8 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { useSession } from "@/lib/auth";
+
 
 export type TxKind = "income" | "expense" | "sale" | "purchase";
 export type PaymentMethod = "Cash" | "Bank" | "POS" | "Transfer";
@@ -223,11 +225,10 @@ export function BusAnalystProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<Store>(() => {
     const activeBusiness: Business =
-      businesses.find((b) => b.id === activeBusinessId) ??
-      businesses[0] ??
-      (DEFAULT_BUSINESSES[0] as Business);
+      businesses.find((b) => b.id === activeBusinessId) ?? businesses[0] ?? GUEST_BUSINESS;
     return {
       ready,
+      isGuest,
       businesses,
       activeBusinessId,
       activeBusiness,
@@ -245,6 +246,7 @@ export function BusAnalystProvider({ children }: { children: ReactNode }) {
     };
   }, [
     ready,
+    isGuest,
     businesses,
     activeBusinessId,
     transactions,
@@ -253,6 +255,7 @@ export function BusAnalystProvider({ children }: { children: ReactNode }) {
     updateTransaction,
     addBusiness,
     entrySheetOpen,
+
   ]);
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
