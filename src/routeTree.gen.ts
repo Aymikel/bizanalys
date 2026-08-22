@@ -20,6 +20,8 @@ import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as MoreIndexRouteImport } from './routes/more.index'
+import { Route as MoreSectionRouteImport } from './routes/more.$section'
 import { Route as ReportsIndexRouteImport } from './routes/reports.index'
 import { Route as ReportsCashFlowRouteImport } from './routes/reports.cash-flow'
 import { Route as ReportsProfitLossRouteImport } from './routes/reports.profit-loss'
@@ -78,6 +80,16 @@ const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const MoreIndexRoute = MoreIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => MoreRoute,
+} as any)
+const MoreSectionRoute = MoreSectionRouteImport.update({
+  id: '/$section',
+  path: '/$section',
+  getParentRoute: () => MoreRoute,
+} as any)
 const ReportsIndexRoute = ReportsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -99,14 +111,16 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/businesses': typeof BusinessesRoute
   '/insight': typeof InsightRoute
-  '/more': typeof MoreRoute
+  '/more': typeof MoreRouteWithChildren
   '/onboarding': typeof OnboardingRoute
   '/reports': typeof ReportsRouteWithChildren
   '/transactions': typeof TransactionsRoute
   '/welcome': typeof WelcomeRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/more/$section': typeof MoreSectionRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
+  '/more/': typeof MoreIndexRoute
   '/reports/': typeof ReportsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -114,13 +128,14 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/businesses': typeof BusinessesRoute
   '/insight': typeof InsightRoute
-  '/more': typeof MoreRoute
   '/onboarding': typeof OnboardingRoute
   '/transactions': typeof TransactionsRoute
   '/welcome': typeof WelcomeRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/more/$section': typeof MoreSectionRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
+  '/more': typeof MoreIndexRoute
   '/reports': typeof ReportsIndexRoute
 }
 export interface FileRoutesById {
@@ -130,14 +145,16 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/businesses': typeof BusinessesRoute
   '/insight': typeof InsightRoute
-  '/more': typeof MoreRoute
+  '/more': typeof MoreRouteWithChildren
   '/onboarding': typeof OnboardingRoute
   '/reports': typeof ReportsRouteWithChildren
   '/transactions': typeof TransactionsRoute
   '/welcome': typeof WelcomeRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/more/$section': typeof MoreSectionRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
+  '/more/': typeof MoreIndexRoute
   '/reports/': typeof ReportsIndexRoute
 }
 export interface FileRouteTypes {
@@ -153,8 +170,10 @@ export interface FileRouteTypes {
     | '/transactions'
     | '/welcome'
     | '/profile'
+    | '/more/$section'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
+    | '/more/'
     | '/reports/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -162,13 +181,14 @@ export interface FileRouteTypes {
     | '/auth'
     | '/businesses'
     | '/insight'
-    | '/more'
     | '/onboarding'
     | '/transactions'
     | '/welcome'
     | '/profile'
+    | '/more/$section'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
+    | '/more'
     | '/reports'
   id:
     | '__root__'
@@ -183,8 +203,10 @@ export interface FileRouteTypes {
     | '/transactions'
     | '/welcome'
     | '/_authenticated/profile'
+    | '/more/$section'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
+    | '/more/'
     | '/reports/'
   fileRoutesById: FileRoutesById
 }
@@ -194,7 +216,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BusinessesRoute: typeof BusinessesRoute
   InsightRoute: typeof InsightRoute
-  MoreRoute: typeof MoreRoute
+  MoreRoute: typeof MoreRouteWithChildren
   OnboardingRoute: typeof OnboardingRoute
   ReportsRoute: typeof ReportsRouteWithChildren
   TransactionsRoute: typeof TransactionsRoute
@@ -280,6 +302,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/more/': {
+      id: '/more/'
+      path: '/'
+      fullPath: '/more/'
+      preLoaderRoute: typeof MoreIndexRouteImport
+      parentRoute: typeof MoreRoute
+    }
+    '/more/$section': {
+      id: '/more/$section'
+      path: '/$section'
+      fullPath: '/more/$section'
+      preLoaderRoute: typeof MoreSectionRouteImport
+      parentRoute: typeof MoreRoute
+    }
     '/reports/': {
       id: '/reports/'
       path: '/'
@@ -315,6 +351,18 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface MoreRouteChildren {
+  MoreSectionRoute: typeof MoreSectionRoute
+  MoreIndexRoute: typeof MoreIndexRoute
+}
+
+const MoreRouteChildren: MoreRouteChildren = {
+  MoreSectionRoute: MoreSectionRoute,
+  MoreIndexRoute: MoreIndexRoute,
+}
+
+const MoreRouteWithChildren = MoreRoute._addFileChildren(MoreRouteChildren)
+
 interface ReportsRouteChildren {
   ReportsCashFlowRoute: typeof ReportsCashFlowRoute
   ReportsProfitLossRoute: typeof ReportsProfitLossRoute
@@ -336,7 +384,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BusinessesRoute: BusinessesRoute,
   InsightRoute: InsightRoute,
-  MoreRoute: MoreRoute,
+  MoreRoute: MoreRouteWithChildren,
   OnboardingRoute: OnboardingRoute,
   ReportsRoute: ReportsRouteWithChildren,
   TransactionsRoute: TransactionsRoute,
