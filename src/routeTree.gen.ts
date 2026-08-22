@@ -21,6 +21,7 @@ import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as MoreIndexRouteImport } from './routes/more.index'
+import { Route as MoreSectionRouteImport } from './routes/more.$section'
 import { Route as ReportsIndexRouteImport } from './routes/reports.index'
 import { Route as ReportsCashFlowRouteImport } from './routes/reports.cash-flow'
 import { Route as ReportsProfitLossRouteImport } from './routes/reports.profit-loss'
@@ -84,6 +85,11 @@ const MoreIndexRoute = MoreIndexRouteImport.update({
   path: '/',
   getParentRoute: () => MoreRoute,
 } as any)
+const MoreSectionRoute = MoreSectionRouteImport.update({
+  id: '/$section',
+  path: '/$section',
+  getParentRoute: () => MoreRoute,
+} as any)
 const ReportsIndexRoute = ReportsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -111,6 +117,7 @@ export interface FileRoutesByFullPath {
   '/transactions': typeof TransactionsRoute
   '/welcome': typeof WelcomeRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/more/$section': typeof MoreSectionRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/more/': typeof MoreIndexRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/transactions': typeof TransactionsRoute
   '/welcome': typeof WelcomeRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/more/$section': typeof MoreSectionRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/more': typeof MoreIndexRoute
@@ -143,6 +151,7 @@ export interface FileRoutesById {
   '/transactions': typeof TransactionsRoute
   '/welcome': typeof WelcomeRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/more/$section': typeof MoreSectionRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/more/': typeof MoreIndexRoute
@@ -161,6 +170,7 @@ export interface FileRouteTypes {
     | '/transactions'
     | '/welcome'
     | '/profile'
+    | '/more/$section'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
     | '/more/'
@@ -175,6 +185,7 @@ export interface FileRouteTypes {
     | '/transactions'
     | '/welcome'
     | '/profile'
+    | '/more/$section'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
     | '/more'
@@ -192,6 +203,7 @@ export interface FileRouteTypes {
     | '/transactions'
     | '/welcome'
     | '/_authenticated/profile'
+    | '/more/$section'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
     | '/more/'
@@ -297,6 +309,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoreIndexRouteImport
       parentRoute: typeof MoreRoute
     }
+    '/more/$section': {
+      id: '/more/$section'
+      path: '/$section'
+      fullPath: '/more/$section'
+      preLoaderRoute: typeof MoreSectionRouteImport
+      parentRoute: typeof MoreRoute
+    }
     '/reports/': {
       id: '/reports/'
       path: '/'
@@ -333,10 +352,12 @@ const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface MoreRouteChildren {
+  MoreSectionRoute: typeof MoreSectionRoute
   MoreIndexRoute: typeof MoreIndexRoute
 }
 
 const MoreRouteChildren: MoreRouteChildren = {
+  MoreSectionRoute: MoreSectionRoute,
   MoreIndexRoute: MoreIndexRoute,
 }
 
