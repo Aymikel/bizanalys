@@ -25,6 +25,7 @@ import {
   trendSeries,
   useBusAnalyst,
 } from "@/lib/busanalyst";
+import { GuestNotice } from "@/components/GuestNotice";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
@@ -47,7 +48,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Dashboard() {
-  const { transactions, activeBusiness } = useBusAnalyst();
+  const { transactions, activeBusiness, isGuest, ready } = useBusAnalyst();
   const [range, setRange] = useState(7);
   const navigate = useNavigate();
   const [gateChecked, setGateChecked] = useState(false);
@@ -67,6 +68,17 @@ function Dashboard() {
   }, [navigate]);
 
   if (!gateChecked) return null;
+
+  if (ready && isGuest) {
+    return (
+      <AppShell>
+        <header className="flex items-center gap-1 font-display text-lg font-semibold text-blue-900">
+          BusAnalyst
+        </header>
+        <GuestNotice />
+      </AppShell>
+    );
+  }
 
 
   const today = dayTotals(transactions, todayISO());

@@ -13,7 +13,7 @@ const NAV = [
 ] as const;
 
 export function AppShell({ children }: { children: ReactNode }) {
-  const { setEntrySheetOpen, activeBusiness } = useBusAnalyst();
+  const { setEntrySheetOpen, activeBusiness, isGuest } = useBusAnalyst();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   const isActive = (to: string) => (to === "/" ? pathname === "/" : pathname.startsWith(to));
@@ -27,8 +27,11 @@ export function AppShell({ children }: { children: ReactNode }) {
           <p className="truncate font-display font-semibold text-blue-900">
             {activeBusiness.name}
           </p>
-          <Link to="/businesses" className="text-xs font-medium text-blue-700 hover:underline">
-            Switch business
+          <Link
+            to={isGuest ? "/auth" : "/businesses"}
+            className="text-xs font-medium text-blue-700 hover:underline"
+          >
+            {isGuest ? "Sign in" : "Switch business"}
           </Link>
         </div>
         <nav className="mt-4 space-y-1">
@@ -48,12 +51,14 @@ export function AppShell({ children }: { children: ReactNode }) {
             </Link>
           ))}
         </nav>
+        {!isGuest && (
         <button
           onClick={() => setEntrySheetOpen(true)}
           className="mt-4 flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-gold-500 px-3 text-sm font-semibold text-charcoal-800"
         >
           <Plus className="h-5 w-5" aria-hidden /> Record
         </button>
+        )}
       </aside>
 
       <div className="min-w-0 flex-1">
@@ -69,6 +74,15 @@ export function AppShell({ children }: { children: ReactNode }) {
             <TabLink key={to} to={to} label={label} Icon={Icon} active={isActive(to)} />
           ))}
           <div className="flex justify-center">
+            {isGuest ? (
+              <Link
+                to="/auth"
+                aria-label="Sign in to record transactions"
+                className="-mt-7 grid h-14 w-14 place-items-center rounded-full bg-paper-100 text-charcoal-500 shadow-lg ring-4 ring-card"
+              >
+                <Plus className="h-7 w-7" aria-hidden />
+              </Link>
+            ) : (
             <button
               onClick={() => setEntrySheetOpen(true)}
               aria-label="Record a transaction"
@@ -76,6 +90,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             >
               <Plus className="h-7 w-7" aria-hidden />
             </button>
+            )}
           </div>
           {NAV.slice(2).map(({ to, label, icon: Icon }) => (
             <TabLink key={to} to={to} label={label} Icon={Icon} active={isActive(to)} />

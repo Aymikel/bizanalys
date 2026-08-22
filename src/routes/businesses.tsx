@@ -6,6 +6,7 @@ import { Money } from "@/components/Money";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { BUSINESS_TYPES, dayTotals, isIncome, todayISO, useBusAnalyst } from "@/lib/busanalyst";
+import { GuestNotice } from "@/components/GuestNotice";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/businesses")({
@@ -24,7 +25,7 @@ export const Route = createFileRoute("/businesses")({
 });
 
 function BusinessSwitcher() {
-  const { businesses, activeBusinessId, setActiveBusiness, allTransactions, addBusiness } =
+  const { businesses, activeBusinessId, setActiveBusiness, allTransactions, addBusiness, isGuest } =
     useBusAnalyst();
   const navigate = useNavigate();
   const [adding, setAdding] = useState(false);
@@ -35,6 +36,14 @@ function BusinessSwitcher() {
     <AppShell>
       <h1 className="text-2xl">Your businesses</h1>
 
+      {isGuest && (
+        <GuestNotice
+          title="No business on a guest session"
+          body="Sign in to create a business and keep its records safely on your account."
+        />
+      )}
+
+      {!isGuest && (
       <div className="mt-3 space-y-3">
         {businesses.map((b) => {
           const txs = allTransactions.filter((t) => t.businessId === b.id);
@@ -121,6 +130,7 @@ function BusinessSwitcher() {
           </button>
         )}
       </div>
+      )}
     </AppShell>
   );
 }
