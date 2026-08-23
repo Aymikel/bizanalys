@@ -51,14 +51,12 @@ export function AppShell({ children }: { children: ReactNode }) {
             </Link>
           ))}
         </nav>
-        {!isGuest && (
         <button
           onClick={() => setEntrySheetOpen(true)}
           className="mt-4 flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-gold-500 px-3 text-sm font-semibold text-charcoal-800"
         >
           <Plus className="h-5 w-5" aria-hidden /> Record
         </button>
-        )}
       </aside>
 
       <div className="min-w-0 flex-1">
