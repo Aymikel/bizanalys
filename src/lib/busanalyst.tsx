@@ -162,8 +162,8 @@ export function BusAnalystProvider({ children }: { children: ReactNode }) {
     if (authLoading) return;
     setReady(false);
     if (!storageKey) {
-      // Guests get a clean slate — no business, no demo data.
-      setBusinesses([]);
+      // Guests get a clean, in-memory slate — no demo data and nothing persisted.
+      setBusinesses([GUEST_BUSINESS]);
       setTransactions([]);
       setActiveBusinessId("guest");
       setReady(true);
