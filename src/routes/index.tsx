@@ -69,16 +69,7 @@ function Dashboard() {
 
   if (!gateChecked) return null;
 
-  if (ready && isGuest) {
-    return (
-      <AppShell>
-        <header className="flex items-center gap-1 font-display text-lg font-semibold text-blue-900">
-          BusAnalyst
-        </header>
-        <GuestNotice />
-      </AppShell>
-    );
-  }
+  if (!ready) return null;
 
 
   const today = dayTotals(transactions, todayISO());
