@@ -145,7 +145,7 @@ type Store = {
 const StoreContext = createContext<Store | null>(null);
 const KEY = "busanalyst.v1";
 
-export const GUEST_BUSINESS: Business = { id: "guest", name: "No business yet", type: "Guest" };
+export const GUEST_BUSINESS: Business = { id: "guest", name: "My Business", type: "Other" };
 
 export function BusAnalystProvider({ children }: { children: ReactNode }) {
   const { user, loading: authLoading } = useSession();
