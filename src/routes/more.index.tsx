@@ -37,34 +37,24 @@ export const Route = createFileRoute("/more/")({
   component: MorePage,
 });
 
-const GROUPS = [
-  {
-    title: "Business",
-    items: [
-      { label: "Customers", icon: Users },
-      { label: "Suppliers", icon: Truck },
-      { label: "Inventory", icon: Boxes },
-    ],
-  },
-  {
-    title: "Setup",
-    items: [
-      { label: "Business profile", icon: Building2 },
-      { label: "User roles", icon: Users },
-      { label: "Payment methods", icon: CreditCard },
-      { label: "Categories", icon: Tags },
-      { label: "Notifications", icon: Bell },
-    ],
-  },
-  {
-    title: "Account",
-    items: [
-      { label: "Export data", icon: Download },
-      { label: "Settings", icon: Settings },
-      { label: "Help & support", icon: LifeBuoy },
-    ],
-  },
-];
+const ICONS = {
+  Users,
+  Truck,
+  Boxes,
+  Building2,
+  CreditCard,
+  Tags,
+  Bell,
+  Download,
+  Settings,
+  LifeBuoy,
+} as const;
+
+const GROUPS = (["Business", "Setup", "Account"] as const).map((title) => ({
+  title,
+  items: MORE_SECTIONS.filter((s) => s.group === title),
+}));
+
 
 
 function MorePage() {
