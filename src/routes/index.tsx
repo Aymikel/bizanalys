@@ -25,7 +25,6 @@ import {
   trendSeries,
   useBusAnalyst,
 } from "@/lib/busanalyst";
-import { GuestNotice } from "@/components/GuestNotice";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
@@ -69,16 +68,7 @@ function Dashboard() {
 
   if (!gateChecked) return null;
 
-  if (ready && isGuest) {
-    return (
-      <AppShell>
-        <header className="flex items-center gap-1 font-display text-lg font-semibold text-blue-900">
-          BusAnalyst
-        </header>
-        <GuestNotice />
-      </AppShell>
-    );
-  }
+  if (!ready) return null;
 
 
   const today = dayTotals(transactions, todayISO());
@@ -92,7 +82,9 @@ function Dashboard() {
         : 0
       : ((today.profit - yesterday.profit) / Math.abs(yesterday.profit)) * 100;
 
-  const bal = balances(transactions);
+  const bal = isGuest
+    ? balances(transactions, { cash: 0, bank: 0, receivable: 0, payable: 0 })
+    : balances(transactions);
   const series = trendSeries(transactions, range);
   const score = healthScore(transactions);
   const status = healthStatus(score);

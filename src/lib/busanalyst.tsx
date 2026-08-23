@@ -145,7 +145,7 @@ type Store = {
 const StoreContext = createContext<Store | null>(null);
 const KEY = "busanalyst.v1";
 
-export const GUEST_BUSINESS: Business = { id: "guest", name: "No business yet", type: "Guest" };
+export const GUEST_BUSINESS: Business = { id: "guest", name: "My Business", type: "Other" };
 
 export function BusAnalystProvider({ children }: { children: ReactNode }) {
   const { user, loading: authLoading } = useSession();
@@ -162,8 +162,8 @@ export function BusAnalystProvider({ children }: { children: ReactNode }) {
     if (authLoading) return;
     setReady(false);
     if (!storageKey) {
-      // Guests get a clean slate — no business, no demo data.
-      setBusinesses([]);
+      // Guests get a clean, in-memory slate — no demo data and nothing persisted.
+      setBusinesses([GUEST_BUSINESS]);
       setTransactions([]);
       setActiveBusinessId("guest");
       setReady(true);
@@ -287,16 +287,24 @@ export function trendSeries(txs: Transaction[], days: number) {
   });
 }
 
-export function balances(txs: Transaction[]) {
+export function balances(
+  txs: Transaction[],
+  opening: { cash: number; bank: number; receivable: number; payable: number } = {
+    cash: 850000,
+    bank: 1240000,
+    receivable: 420000,
+    payable: 280000,
+  },
+) {
   const byMethod = (method: PaymentMethod) =>
     txs
       .filter((t) => t.method === method)
       .reduce((s, t) => s + (isIncome(t.kind) ? t.amount : -t.amount), 0);
   return {
-    cash: 850000 + byMethod("Cash"),
-    bank: 1240000 + byMethod("Bank") + byMethod("Transfer") + byMethod("POS"),
-    receivable: 420000,
-    payable: 280000,
+    cash: opening.cash + byMethod("Cash"),
+    bank: opening.bank + byMethod("Bank") + byMethod("Transfer") + byMethod("POS"),
+    receivable: opening.receivable,
+    payable: opening.payable,
   };
 }
 
