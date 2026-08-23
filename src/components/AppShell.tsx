@@ -72,15 +72,6 @@ export function AppShell({ children }: { children: ReactNode }) {
             <TabLink key={to} to={to} label={label} Icon={Icon} active={isActive(to)} />
           ))}
           <div className="flex justify-center">
-            {isGuest ? (
-              <Link
-                to="/auth"
-                aria-label="Sign in to record transactions"
-                className="-mt-7 grid h-14 w-14 place-items-center rounded-full bg-paper-100 text-charcoal-500 shadow-lg ring-4 ring-card"
-              >
-                <Plus className="h-7 w-7" aria-hidden />
-              </Link>
-            ) : (
             <button
               onClick={() => setEntrySheetOpen(true)}
               aria-label="Record a transaction"
@@ -88,7 +79,6 @@ export function AppShell({ children }: { children: ReactNode }) {
             >
               <Plus className="h-7 w-7" aria-hidden />
             </button>
-            )}
           </div>
           {NAV.slice(2).map(({ to, label, icon: Icon }) => (
             <TabLink key={to} to={to} label={label} Icon={Icon} active={isActive(to)} />
