@@ -19,6 +19,7 @@ import { AppShell } from "@/components/AppShell";
 import { useBusAnalyst } from "@/lib/busanalyst";
 import { useSession, displayName } from "@/lib/auth";
 import { supabase } from "@/integrations/supabase/client";
+import { MORE_SECTIONS } from "@/lib/more-sections";
 
 
 export const Route = createFileRoute("/more/")({
@@ -37,34 +38,24 @@ export const Route = createFileRoute("/more/")({
   component: MorePage,
 });
 
-const GROUPS = [
-  {
-    title: "Business",
-    items: [
-      { label: "Customers", icon: Users },
-      { label: "Suppliers", icon: Truck },
-      { label: "Inventory", icon: Boxes },
-    ],
-  },
-  {
-    title: "Setup",
-    items: [
-      { label: "Business profile", icon: Building2 },
-      { label: "User roles", icon: Users },
-      { label: "Payment methods", icon: CreditCard },
-      { label: "Categories", icon: Tags },
-      { label: "Notifications", icon: Bell },
-    ],
-  },
-  {
-    title: "Account",
-    items: [
-      { label: "Export data", icon: Download },
-      { label: "Settings", icon: Settings },
-      { label: "Help & support", icon: LifeBuoy },
-    ],
-  },
-];
+const ICONS = {
+  Users,
+  Truck,
+  Boxes,
+  Building2,
+  CreditCard,
+  Tags,
+  Bell,
+  Download,
+  Settings,
+  LifeBuoy,
+} as const;
+
+const GROUPS = (["Business", "Setup", "Account"] as const).map((title) => ({
+  title,
+  items: MORE_SECTIONS.filter((s) => s.group === title),
+}));
+
 
 
 function MorePage() {
@@ -137,16 +128,22 @@ function MorePage() {
           <section key={g.title}>
             <h2 className="text-sm tracking-wide text-muted-foreground uppercase">{g.title}</h2>
             <div className="mt-2 card-surface overflow-hidden">
-              {g.items.map(({ label, icon: Icon }) => (
-                <button
-                  key={label}
-                  className="grid w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 border-b px-4 py-3 text-left last:border-0 hover:bg-blue-50"
-                >
-                  <Icon className="h-5 w-5 shrink-0 text-blue-900" aria-hidden />
-                  <span className="truncate text-sm text-charcoal-800">{label}</span>
-                  <ChevronRight className="h-4 w-4 shrink-0 text-charcoal-500" aria-hidden />
-                </button>
-              ))}
+              {g.items.map((item) => {
+                const Icon = ICONS[item.icon];
+                return (
+                  <Link
+                    key={item.slug}
+                    to="/more/$section"
+                    params={{ section: item.slug }}
+                    className="grid w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 border-b px-4 py-3 text-left last:border-0 hover:bg-blue-50"
+                  >
+                    <Icon className="h-5 w-5 shrink-0 text-blue-900" aria-hidden />
+                    <span className="truncate text-sm text-charcoal-800">{item.label}</span>
+                    <ChevronRight className="h-4 w-4 shrink-0 text-charcoal-500" aria-hidden />
+                  </Link>
+                );
+              })}
+
             </div>
           </section>
         ))}
