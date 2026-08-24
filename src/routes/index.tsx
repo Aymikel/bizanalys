@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { WELCOME_KEY } from "@/lib/welcome";
+import { welcomeIsFresh } from "@/lib/welcome";
 
 import { Bell, ChevronDown, Sparkles, User } from "lucide-react";
 import {
@@ -53,13 +53,7 @@ function Dashboard() {
   const [gateChecked, setGateChecked] = useState(false);
 
   useEffect(() => {
-    let seen = false;
-    try {
-      seen = localStorage.getItem(WELCOME_KEY) === "1";
-    } catch {
-      seen = true;
-    }
-    if (!seen) {
+    if (!welcomeIsFresh()) {
       navigate({ to: "/welcome", replace: true });
       return;
     }
