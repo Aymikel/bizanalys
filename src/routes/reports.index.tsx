@@ -5,13 +5,13 @@ import { ChevronRight, Lock } from "lucide-react";
 export const Route = createFileRoute("/reports/")({
   head: () => ({
     meta: [
-      { title: "Reports Centre — BusAnalyst" },
+      { title: "Reports Centre — BizAnalyst" },
       {
         name: "description",
         content:
           "Profit & loss, cash flow, sales, expenses and inventory reports built from your daily records.",
       },
-      { property: "og:title", content: "Reports Centre — BusAnalyst" },
+      { property: "og:title", content: "Reports Centre — BizAnalyst" },
       {
         property: "og:description",
         content: "Financial statements generated from what you recorded today.",

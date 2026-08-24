@@ -8,7 +8,7 @@ import {
   formatDayLabel,
   isIncome,
   PAYMENT_METHODS,
-  useBusAnalyst,
+  useBizAnalyst,
   type Transaction,
 } from "@/lib/busanalyst";
 import { cn } from "@/lib/utils";
@@ -27,13 +27,13 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/transactions")({
   head: () => ({
     meta: [
-      { title: "Transactions — BusAnalyst" },
+      { title: "Transactions — BizAnalyst" },
       {
         name: "description",
         content:
           "Every sale, purchase, income and expense grouped by day with running daily totals.",
       },
-      { property: "og:title", content: "Transactions — BusAnalyst" },
+      { property: "og:title", content: "Transactions — BizAnalyst" },
       { property: "og:description", content: "Your daily money in and money out, at a glance." },
     ],
   }),
@@ -42,7 +42,7 @@ export const Route = createFileRoute("/transactions")({
 
 function TransactionsPage() {
   const { transactions, deleteTransaction, updateTransaction, setEntrySheetOpen } =
-    useBusAnalyst();
+    useBizAnalyst();
   const [query, setQuery] = useState("");
   const [type, setType] = useState<"all" | "in" | "out">("all");
   const [method, setMethod] = useState<string>("all");

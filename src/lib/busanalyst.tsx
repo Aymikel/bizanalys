@@ -147,7 +147,7 @@ const KEY = "busanalyst.v1";
 
 export const GUEST_BUSINESS: Business = { id: "guest", name: "My Business", type: "Other" };
 
-export function BusAnalystProvider({ children }: { children: ReactNode }) {
+export function BizAnalystProvider({ children }: { children: ReactNode }) {
   const { user, loading: authLoading } = useSession();
   const isGuest = !user;
   const storageKey = user ? `${KEY}:${user.id}` : null;
@@ -261,9 +261,9 @@ export function BusAnalystProvider({ children }: { children: ReactNode }) {
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
 }
 
-export function useBusAnalyst() {
+export function useBizAnalyst() {
   const ctx = useContext(StoreContext);
-  if (!ctx) throw new Error("useBusAnalyst must be used inside BusAnalystProvider");
+  if (!ctx) throw new Error("useBizAnalyst must be used inside BizAnalystProvider");
   return ctx;
 }
 

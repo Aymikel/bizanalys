@@ -8,13 +8,13 @@ import { useSession } from "@/lib/auth";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign in — BusAnalyst" },
+      { title: "Sign in — BizAnalyst" },
       {
         name: "description",
         content:
-          "Sign in or create your BusAnalyst account to track sales, expenses and business health.",
+          "Sign in or create your BizAnalyst account to track sales, expenses and business health.",
       },
-      { property: "og:title", content: "Sign in — BusAnalyst" },
+      { property: "og:title", content: "Sign in — BizAnalyst" },
       { property: "og:description", content: "Access your business records securely." },
     ],
   }),
@@ -84,7 +84,7 @@ function AuthPage() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-background px-4 py-10">
       <div className="card-surface w-full max-w-sm p-6">
-        <h1 className="font-display text-2xl text-blue-900">BusAnalyst</h1>
+        <h1 className="font-display text-2xl text-blue-900">BizAnalyst</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           {mode === "signin" ? "Sign in to your business" : "Create your account"}
         </p>

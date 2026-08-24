@@ -10,13 +10,13 @@ import { useSession, displayName } from "@/lib/auth";
 export const Route = createFileRoute("/_authenticated/profile")({
   head: () => ({
     meta: [
-      { title: "Your profile — BusAnalyst" },
+      { title: "Your profile — BizAnalyst" },
       {
         name: "description",
-        content: "Update your name, business name and contact details in BusAnalyst.",
+        content: "Update your name, business name and contact details in BizAnalyst.",
       },
-      { property: "og:title", content: "Your profile — BusAnalyst" },
-      { property: "og:description", content: "Manage your BusAnalyst account details." },
+      { property: "og:title", content: "Your profile — BizAnalyst" },
+      { property: "og:description", content: "Manage your BizAnalyst account details." },
     ],
   }),
   component: ProfilePage,

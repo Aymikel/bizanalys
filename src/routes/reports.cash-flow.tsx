@@ -9,18 +9,18 @@ import {
   isIncome,
   PAYMENT_METHODS,
   trendSeries,
-  useBusAnalyst,
+  useBizAnalyst,
 } from "@/lib/busanalyst";
 
 export const Route = createFileRoute("/reports/cash-flow")({
   head: () => ({
     meta: [
-      { title: "Cash Flow report — BusAnalyst" },
+      { title: "Cash Flow report — BizAnalyst" },
       {
         name: "description",
         content: "Track money in and money out by day and by payment method — cash, bank, POS, transfer.",
       },
-      { property: "og:title", content: "Cash Flow report — BusAnalyst" },
+      { property: "og:title", content: "Cash Flow report — BizAnalyst" },
       { property: "og:description", content: "Where your money came in and where it went out." },
     ],
   }),
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/reports/cash-flow")({
 });
 
 function CashFlow() {
-  const { transactions } = useBusAnalyst();
+  const { transactions } = useBizAnalyst();
   const [range, setRange] = useState(30);
   const series = trendSeries(transactions, range);
   const dates = new Set(series.map((d) => d.date));

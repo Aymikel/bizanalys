@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * BusAnalyst design system.
+ * BizAnalyst design system.
  * Blue (trust) / Gold (value) / Emerald (money in) / Rust (money out).
  * All colors in oklch. Never hardcode hex in components.
  */

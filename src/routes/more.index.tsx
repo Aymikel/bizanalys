@@ -16,7 +16,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
-import { useBusAnalyst } from "@/lib/busanalyst";
+import { useBizAnalyst } from "@/lib/busanalyst";
 import { useSession, displayName } from "@/lib/auth";
 import { supabase } from "@/integrations/supabase/client";
 import { MORE_SECTIONS } from "@/lib/more-sections";
@@ -25,13 +25,13 @@ import { MORE_SECTIONS } from "@/lib/more-sections";
 export const Route = createFileRoute("/more/")({
   head: () => ({
     meta: [
-      { title: "More & Settings — BusAnalyst" },
+      { title: "More & Settings — BizAnalyst" },
       {
         name: "description",
         content:
           "Manage businesses, customers, suppliers, inventory, roles, categories and app settings.",
       },
-      { property: "og:title", content: "More & Settings — BusAnalyst" },
+      { property: "og:title", content: "More & Settings — BizAnalyst" },
       { property: "og:description", content: "Everything else about running your business." },
     ],
   }),
@@ -59,7 +59,7 @@ const GROUPS = (["Business", "Setup", "Account"] as const).map((title) => ({
 
 
 function MorePage() {
-  const { activeBusiness } = useBusAnalyst();
+  const { activeBusiness } = useBizAnalyst();
   const { user, loading } = useSession();
   const navigate = useNavigate();
   const queryClient = useQueryClient();

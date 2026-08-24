@@ -4,7 +4,7 @@ import {
   CATEGORIES_BY_TYPE,
   PAYMENT_METHODS,
   todayISO,
-  useBusAnalyst,
+  useBizAnalyst,
   type PaymentMethod,
   type TxKind,
 } from "@/lib/busanalyst";
@@ -48,7 +48,7 @@ function Chip({
 }
 
 export function QuickEntrySheet() {
-  const { entrySheetOpen, setEntrySheetOpen, addTransaction, activeBusiness } = useBusAnalyst();
+  const { entrySheetOpen, setEntrySheetOpen, addTransaction, activeBusiness } = useBizAnalyst();
   const [kind, setKind] = useState<TxKind>("sale");
   const [amount, setAmount] = useState("");
   const [method, setMethod] = useState<PaymentMethod>("Cash");

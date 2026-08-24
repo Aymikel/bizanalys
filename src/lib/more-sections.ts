@@ -115,7 +115,7 @@ export const MORE_SECTIONS: MoreSection[] = [
     label: "Settings",
     group: "Account",
     icon: "Settings",
-    blurb: "App preferences that shape how BusAnalyst behaves for you.",
+    blurb: "App preferences that shape how BizAnalyst behaves for you.",
     points: ["Currency and number format", "Week start and financial year", "Data and privacy controls"],
   },
   {

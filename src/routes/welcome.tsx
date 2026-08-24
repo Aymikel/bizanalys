@@ -5,13 +5,13 @@ import { WELCOME_KEY } from "@/lib/welcome";
 export const Route = createFileRoute("/welcome")({
   head: () => ({
     meta: [
-      { title: "Welcome to BusAnalyst — Your numbers, understood" },
+      { title: "Welcome to BizAnalyst — Your numbers, understood" },
       {
         name: "description",
         content:
-          "Start with BusAnalyst: continue as a guest or sign in to track daily profit, cash flow and business health.",
+          "Start with BizAnalyst: continue as a guest or sign in to track daily profit, cash flow and business health.",
       },
-      { property: "og:title", content: "Welcome to BusAnalyst" },
+      { property: "og:title", content: "Welcome to BizAnalyst" },
       {
         property: "og:description",
         content: "Continue as guest or sign in to track profit, cash and business health.",
