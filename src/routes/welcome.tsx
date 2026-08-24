@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { WELCOME_KEY } from "@/lib/welcome";
+import { WELCOME_AUTO_MS, markWelcomeSeen } from "@/lib/welcome";
 
 export const Route = createFileRoute("/welcome")({
   head: () => ({
@@ -24,13 +25,16 @@ export const Route = createFileRoute("/welcome")({
 function Welcome() {
   const navigate = useNavigate();
 
-  function markSeen() {
-    try {
-      localStorage.setItem(WELCOME_KEY, "1");
-    } catch {
-      /* ignore */
-    }
-  }
+  const markSeen = markWelcomeSeen;
+
+  // Auto-continue to the dashboard after the splash has been shown briefly.
+  useEffect(() => {
+    const t = setTimeout(() => {
+      markWelcomeSeen();
+      navigate({ to: "/", replace: true });
+    }, WELCOME_AUTO_MS);
+    return () => clearTimeout(t);
+  }, [navigate]);
 
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-blue-900 px-6 py-12">
