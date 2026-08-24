@@ -56,7 +56,7 @@ function Welcome() {
           </svg>
         </div>
         <h1 className="font-display text-3xl font-bold tracking-tight text-paper-50">
-          Bus<span className="text-gold-500">Analyst</span>
+          Biz<span className="text-gold-500">Analyst</span>
         </h1>
         <p className="mt-2 text-xs tracking-[0.4px] text-paper-50/65 uppercase">
           Your Numbers, Understood
