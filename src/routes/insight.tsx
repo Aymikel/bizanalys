@@ -6,18 +6,18 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } fro
 import { AppShell } from "@/components/AppShell";
 import { Money } from "@/components/Money";
 import { Input } from "@/components/ui/input";
-import { formatCompact, isIncome, trendSeries, useBusAnalyst } from "@/lib/busanalyst";
+import { formatCompact, isIncome, trendSeries, useBizAnalyst } from "@/lib/busanalyst";
 
 export const Route = createFileRoute("/insight")({
   head: () => ({
     meta: [
-      { title: "AI insight — BusAnalyst" },
+      { title: "AI insight — BizAnalyst" },
       {
         name: "description",
         content:
           "A plain-language explanation of what changed in your business this month, with one clear recommendation.",
       },
-      { property: "og:title", content: "AI insight — BusAnalyst" },
+      { property: "og:title", content: "AI insight — BizAnalyst" },
       { property: "og:description", content: "Your numbers, explained like a person would." },
     ],
   }),
@@ -25,7 +25,7 @@ export const Route = createFileRoute("/insight")({
 });
 
 function InsightDetail() {
-  const { transactions } = useBusAnalyst();
+  const { transactions } = useBizAnalyst();
   const [question, setQuestion] = useState("");
   const [thread, setThread] = useState<Array<{ q: string; a: string }>>([]);
 

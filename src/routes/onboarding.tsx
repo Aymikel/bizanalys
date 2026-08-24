@@ -3,19 +3,19 @@ import { useState } from "react";
 import { Store, UtensilsCrossed, Sprout, Wrench, Factory, Boxes } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { BUSINESS_TYPES, PAYMENT_METHODS, useBusAnalyst } from "@/lib/busanalyst";
+import { BUSINESS_TYPES, PAYMENT_METHODS, useBizAnalyst } from "@/lib/busanalyst";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/onboarding")({
   head: () => ({
     meta: [
-      { title: "Set up your business — BusAnalyst" },
+      { title: "Set up your business — BizAnalyst" },
       {
         name: "description",
         content:
           "Five short steps: name your business, pick its type and payment methods, and your dashboard is ready.",
       },
-      { property: "og:title", content: "Set up your business — BusAnalyst" },
+      { property: "og:title", content: "Set up your business — BizAnalyst" },
       { property: "og:description", content: "Ready in under a minute. No accounting needed." },
     ],
   }),
@@ -32,7 +32,7 @@ const TYPE_ICONS: Record<string, React.ComponentType<{ className?: string }>> = 
 };
 
 function Onboarding() {
-  const { addBusiness } = useBusAnalyst();
+  const { addBusiness } = useBizAnalyst();
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
@@ -60,7 +60,7 @@ function Onboarding() {
           <>
             <h1 className="text-3xl">Know your business, day by day.</h1>
             <p className="mt-3 text-charcoal-500">
-              Record what happened today in plain words — BusAnalyst turns it into profit, cash flow
+              Record what happened today in plain words — BizAnalyst turns it into profit, cash flow
               and advice.
             </p>
           </>

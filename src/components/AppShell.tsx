@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Plus, LayoutDashboard, Receipt, BarChart3, MoreHorizontal } from "lucide-react";
 import type { ReactNode } from "react";
-import { useBusAnalyst } from "@/lib/busanalyst";
+import { useBizAnalyst } from "@/lib/busanalyst";
 import { QuickEntrySheet } from "@/components/QuickEntrySheet";
 import { cn } from "@/lib/utils";
 
@@ -13,7 +13,7 @@ const NAV = [
 ] as const;
 
 export function AppShell({ children }: { children: ReactNode }) {
-  const { setEntrySheetOpen, activeBusiness, isGuest } = useBusAnalyst();
+  const { setEntrySheetOpen, activeBusiness, isGuest } = useBizAnalyst();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   const isActive = (to: string) => (to === "/" ? pathname === "/" : pathname.startsWith(to));

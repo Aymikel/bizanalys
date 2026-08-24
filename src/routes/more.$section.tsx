@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { GuestNotice } from "@/components/GuestNotice";
-import { useBusAnalyst } from "@/lib/busanalyst";
+import { useBizAnalyst } from "@/lib/busanalyst";
 import { findSection } from "@/lib/more-sections";
 
 const ICONS = {
@@ -40,15 +40,15 @@ export const Route = createFileRoute("/more/$section")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Not found — BusAnalyst" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Not found — BizAnalyst" }, { name: "robots", content: "noindex" }],
       };
     }
     const { label, blurb } = loaderData.section;
     return {
       meta: [
-        { title: `${label} — BusAnalyst` },
+        { title: `${label} — BizAnalyst` },
         { name: "description", content: blurb },
-        { property: "og:title", content: `${label} — BusAnalyst` },
+        { property: "og:title", content: `${label} — BizAnalyst` },
         { property: "og:description", content: blurb },
       ],
     };
@@ -59,7 +59,7 @@ export const Route = createFileRoute("/more/$section")({
 
 function SectionPage() {
   const { section } = Route.useLoaderData();
-  const { isGuest } = useBusAnalyst();
+  const { isGuest } = useBizAnalyst();
   const Icon = ICONS[section.icon];
 
   return (
@@ -79,7 +79,7 @@ function SectionPage() {
       {isGuest ? (
         <GuestNotice
           title={`Sign in to use ${section.label}`}
-          body="This part of BusAnalyst belongs to a business. Create an account or log in to set it up."
+          body="This part of BizAnalyst belongs to a business. Create an account or log in to set it up."
         />
       ) : (
         <>

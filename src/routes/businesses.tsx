@@ -5,19 +5,19 @@ import { AppShell } from "@/components/AppShell";
 import { Money } from "@/components/Money";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { BUSINESS_TYPES, dayTotals, isIncome, todayISO, useBusAnalyst } from "@/lib/busanalyst";
+import { BUSINESS_TYPES, dayTotals, isIncome, todayISO, useBizAnalyst } from "@/lib/busanalyst";
 import { GuestNotice } from "@/components/GuestNotice";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/businesses")({
   head: () => ({
     meta: [
-      { title: "Switch business — BusAnalyst" },
+      { title: "Switch business — BizAnalyst" },
       {
         name: "description",
         content: "Move between the businesses you run and see today's profit for each one.",
       },
-      { property: "og:title", content: "Switch business — BusAnalyst" },
+      { property: "og:title", content: "Switch business — BizAnalyst" },
       { property: "og:description", content: "One app, every business you run." },
     ],
   }),
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/businesses")({
 
 function BusinessSwitcher() {
   const { businesses, activeBusinessId, setActiveBusiness, allTransactions, addBusiness, isGuest } =
-    useBusAnalyst();
+    useBizAnalyst();
   const navigate = useNavigate();
   const [adding, setAdding] = useState(false);
   const [name, setName] = useState("");

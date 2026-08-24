@@ -1,9 +1,9 @@
 import { useNavigate } from "@tanstack/react-router";
-import { isIncome, todayISO, useBusAnalyst, formatMoney } from "@/lib/busanalyst";
+import { isIncome, todayISO, useBizAnalyst, formatMoney } from "@/lib/busanalyst";
 import { cn } from "@/lib/utils";
 
 export function DayThread() {
-  const { transactions } = useBusAnalyst();
+  const { transactions } = useBizAnalyst();
   const navigate = useNavigate();
   const today = transactions.filter((t) => t.date === todayISO());
   const placeholders = Math.max(0, 7 - today.length);

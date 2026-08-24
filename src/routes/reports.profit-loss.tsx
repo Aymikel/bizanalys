@@ -3,17 +3,17 @@ import { useState } from "react";
 import { AppShell } from "@/components/AppShell";
 import { Money } from "@/components/Money";
 import { ReportBottomBar, RangePicker } from "@/components/ReportChrome";
-import { isIncome, trendSeries, useBusAnalyst } from "@/lib/busanalyst";
+import { isIncome, trendSeries, useBizAnalyst } from "@/lib/busanalyst";
 
 export const Route = createFileRoute("/reports/profit-loss")({
   head: () => ({
     meta: [
-      { title: "Profit & Loss report — BusAnalyst" },
+      { title: "Profit & Loss report — BizAnalyst" },
       {
         name: "description",
         content: "See revenue, cost lines and net profit for the last 7, 30 or 90 days.",
       },
-      { property: "og:title", content: "Profit & Loss report — BusAnalyst" },
+      { property: "og:title", content: "Profit & Loss report — BizAnalyst" },
       { property: "og:description", content: "Revenue minus expenses, explained in plain terms." },
     ],
   }),
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/reports/profit-loss")({
 });
 
 function ProfitLoss() {
-  const { transactions } = useBusAnalyst();
+  const { transactions } = useBizAnalyst();
   const [range, setRange] = useState(30);
   const dates = new Set(trendSeries(transactions, range).map((d) => d.date));
   const rows = transactions.filter((t) => dates.has(t.date));

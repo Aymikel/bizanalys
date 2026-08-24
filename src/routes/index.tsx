@@ -23,20 +23,20 @@ import {
   healthStatus,
   todayISO,
   trendSeries,
-  useBusAnalyst,
+  useBizAnalyst,
 } from "@/lib/busanalyst";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "BusAnalyst — Daily profit dashboard for small businesses" },
+      { title: "BizAnalyst — Daily profit dashboard for small businesses" },
       {
         name: "description",
         content:
           "Record what happened today in plain language and see profit, cash, trends and health for your business — no accounting knowledge needed.",
       },
-      { property: "og:title", content: "BusAnalyst — Daily profit dashboard" },
+      { property: "og:title", content: "BizAnalyst — Daily profit dashboard" },
       {
         property: "og:description",
         content: "Turn everyday business notes into profit, cash flow and insight.",
@@ -47,7 +47,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Dashboard() {
-  const { transactions, activeBusiness, isGuest, ready } = useBusAnalyst();
+  const { transactions, activeBusiness, isGuest, ready } = useBizAnalyst();
   const [range, setRange] = useState(7);
   const navigate = useNavigate();
   const [gateChecked, setGateChecked] = useState(false);

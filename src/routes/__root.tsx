@@ -11,7 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { BusAnalystProvider } from "@/lib/busanalyst";
+import { BizAnalystProvider } from "@/lib/busanalyst";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
@@ -79,7 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "BusAnalyst" },
+      { title: "BizAnalyst" },
       {
         name: "description",
         content: "Business intelligence and financial management for small businesses.",
@@ -126,11 +126,11 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BusAnalystProvider>
+      <BizAnalystProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
         <Toaster position="top-center" richColors />
-      </BusAnalystProvider>
+      </BizAnalystProvider>
     </QueryClientProvider>
   );
 }
