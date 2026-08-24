@@ -4,7 +4,7 @@ export const WELCOME_KEY = "ba-welcome-seen";
 export const WELCOME_TTL_MS = 2 * 60 * 60 * 1000; // 2 hours
 
 /** How long the splash stays up before continuing automatically. */
-export const WELCOME_AUTO_MS = 5000;
+export const WELCOME_AUTO_MS = 20000;
 
 export function welcomeIsFresh(): boolean {
   try {
