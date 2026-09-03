@@ -26,6 +26,7 @@ import { Route as MoreCustomersRouteImport } from './routes/more.customers'
 import { Route as ReportsIndexRouteImport } from './routes/reports.index'
 import { Route as ReportsCashFlowRouteImport } from './routes/reports.cash-flow'
 import { Route as ReportsProfitLossRouteImport } from './routes/reports.profit-loss'
+import { Route as MoreCustomerIdRouteImport } from './routes/more.customer.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -111,6 +112,11 @@ const ReportsProfitLossRoute = ReportsProfitLossRouteImport.update({
   path: '/profit-loss',
   getParentRoute: () => ReportsRoute,
 } as any)
+const MoreCustomerIdRoute = MoreCustomerIdRouteImport.update({
+  id: '/customer/$id',
+  path: '/customer/$id',
+  getParentRoute: () => MoreRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -129,6 +135,7 @@ export interface FileRoutesByFullPath {
   '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/more/': typeof MoreIndexRoute
   '/reports/': typeof ReportsIndexRoute
+  '/more/customer/$id': typeof MoreCustomerIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -145,6 +152,7 @@ export interface FileRoutesByTo {
   '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/more': typeof MoreIndexRoute
   '/reports': typeof ReportsIndexRoute
+  '/more/customer/$id': typeof MoreCustomerIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -165,6 +173,7 @@ export interface FileRoutesById {
   '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/more/': typeof MoreIndexRoute
   '/reports/': typeof ReportsIndexRoute
+  '/more/customer/$id': typeof MoreCustomerIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -185,6 +194,7 @@ export interface FileRouteTypes {
     | '/reports/profit-loss'
     | '/more/'
     | '/reports/'
+    | '/more/customer/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -201,6 +211,7 @@ export interface FileRouteTypes {
     | '/reports/profit-loss'
     | '/more'
     | '/reports'
+    | '/more/customer/$id'
   id:
     | '__root__'
     | '/'
@@ -220,6 +231,7 @@ export interface FileRouteTypes {
     | '/reports/profit-loss'
     | '/more/'
     | '/reports/'
+    | '/more/customer/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -356,6 +368,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReportsProfitLossRouteImport
       parentRoute: typeof ReportsRoute
     }
+    '/more/customer/$id': {
+      id: '/more/customer/$id'
+      path: '/customer/$id'
+      fullPath: '/more/customer/$id'
+      preLoaderRoute: typeof MoreCustomerIdRouteImport
+      parentRoute: typeof MoreRoute
+    }
   }
 }
 
@@ -374,12 +393,14 @@ interface MoreRouteChildren {
   MoreSectionRoute: typeof MoreSectionRoute
   MoreCustomersRoute: typeof MoreCustomersRoute
   MoreIndexRoute: typeof MoreIndexRoute
+  MoreCustomerIdRoute: typeof MoreCustomerIdRoute
 }
 
 const MoreRouteChildren: MoreRouteChildren = {
   MoreSectionRoute: MoreSectionRoute,
   MoreCustomersRoute: MoreCustomersRoute,
   MoreIndexRoute: MoreIndexRoute,
+  MoreCustomerIdRoute: MoreCustomerIdRoute,
 }
 
 const MoreRouteWithChildren = MoreRoute._addFileChildren(MoreRouteChildren)
