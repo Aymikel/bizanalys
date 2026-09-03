@@ -25,6 +25,7 @@ import { Route as MoreSectionRouteImport } from './routes/more.$section'
 import { Route as MoreBusinessProfileRouteImport } from './routes/more.business-profile'
 import { Route as MoreCustomersRouteImport } from './routes/more.customers'
 import { Route as MoreInventoryRouteImport } from './routes/more.inventory'
+import { Route as MorePaymentMethodsRouteImport } from './routes/more.payment-methods'
 import { Route as MoreSuppliersRouteImport } from './routes/more.suppliers'
 import { Route as MoreUserRolesRouteImport } from './routes/more.user-roles'
 import { Route as ReportsIndexRouteImport } from './routes/reports.index'
@@ -112,6 +113,11 @@ const MoreInventoryRoute = MoreInventoryRouteImport.update({
   path: '/inventory',
   getParentRoute: () => MoreRoute,
 } as any)
+const MorePaymentMethodsRoute = MorePaymentMethodsRouteImport.update({
+  id: '/payment-methods',
+  path: '/payment-methods',
+  getParentRoute: () => MoreRoute,
+} as any)
 const MoreSuppliersRoute = MoreSuppliersRouteImport.update({
   id: '/suppliers',
   path: '/suppliers',
@@ -163,6 +169,7 @@ export interface FileRoutesByFullPath {
   '/more/business-profile': typeof MoreBusinessProfileRoute
   '/more/customers': typeof MoreCustomersRoute
   '/more/inventory': typeof MoreInventoryRoute
+  '/more/payment-methods': typeof MorePaymentMethodsRoute
   '/more/suppliers': typeof MoreSuppliersRoute
   '/more/user-roles': typeof MoreUserRolesRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
@@ -185,6 +192,7 @@ export interface FileRoutesByTo {
   '/more/business-profile': typeof MoreBusinessProfileRoute
   '/more/customers': typeof MoreCustomersRoute
   '/more/inventory': typeof MoreInventoryRoute
+  '/more/payment-methods': typeof MorePaymentMethodsRoute
   '/more/suppliers': typeof MoreSuppliersRoute
   '/more/user-roles': typeof MoreUserRolesRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
@@ -211,6 +219,7 @@ export interface FileRoutesById {
   '/more/business-profile': typeof MoreBusinessProfileRoute
   '/more/customers': typeof MoreCustomersRoute
   '/more/inventory': typeof MoreInventoryRoute
+  '/more/payment-methods': typeof MorePaymentMethodsRoute
   '/more/suppliers': typeof MoreSuppliersRoute
   '/more/user-roles': typeof MoreUserRolesRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
@@ -237,6 +246,7 @@ export interface FileRouteTypes {
     | '/more/business-profile'
     | '/more/customers'
     | '/more/inventory'
+    | '/more/payment-methods'
     | '/more/suppliers'
     | '/more/user-roles'
     | '/reports/cash-flow'
@@ -259,6 +269,7 @@ export interface FileRouteTypes {
     | '/more/business-profile'
     | '/more/customers'
     | '/more/inventory'
+    | '/more/payment-methods'
     | '/more/suppliers'
     | '/more/user-roles'
     | '/reports/cash-flow'
@@ -284,6 +295,7 @@ export interface FileRouteTypes {
     | '/more/business-profile'
     | '/more/customers'
     | '/more/inventory'
+    | '/more/payment-methods'
     | '/more/suppliers'
     | '/more/user-roles'
     | '/reports/cash-flow'
@@ -421,6 +433,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoreInventoryRouteImport
       parentRoute: typeof MoreRoute
     }
+    '/more/payment-methods': {
+      id: '/more/payment-methods'
+      path: '/payment-methods'
+      fullPath: '/more/payment-methods'
+      preLoaderRoute: typeof MorePaymentMethodsRouteImport
+      parentRoute: typeof MoreRoute
+    }
     '/more/suppliers': {
       id: '/more/suppliers'
       path: '/suppliers'
@@ -489,6 +508,7 @@ interface MoreRouteChildren {
   MoreBusinessProfileRoute: typeof MoreBusinessProfileRoute
   MoreCustomersRoute: typeof MoreCustomersRoute
   MoreInventoryRoute: typeof MoreInventoryRoute
+  MorePaymentMethodsRoute: typeof MorePaymentMethodsRoute
   MoreSuppliersRoute: typeof MoreSuppliersRoute
   MoreUserRolesRoute: typeof MoreUserRolesRoute
   MoreIndexRoute: typeof MoreIndexRoute
@@ -501,6 +521,7 @@ const MoreRouteChildren: MoreRouteChildren = {
   MoreBusinessProfileRoute: MoreBusinessProfileRoute,
   MoreCustomersRoute: MoreCustomersRoute,
   MoreInventoryRoute: MoreInventoryRoute,
+  MorePaymentMethodsRoute: MorePaymentMethodsRoute,
   MoreSuppliersRoute: MoreSuppliersRoute,
   MoreUserRolesRoute: MoreUserRolesRoute,
   MoreIndexRoute: MoreIndexRoute,
