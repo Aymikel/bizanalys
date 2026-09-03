@@ -22,9 +22,18 @@ import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as MoreIndexRouteImport } from './routes/more.index'
 import { Route as MoreSectionRouteImport } from './routes/more.$section'
+import { Route as MoreBusinessProfileRouteImport } from './routes/more.business-profile'
+import { Route as MoreCategoriesRouteImport } from './routes/more.categories'
+import { Route as MoreCustomersRouteImport } from './routes/more.customers'
+import { Route as MoreInventoryRouteImport } from './routes/more.inventory'
+import { Route as MorePaymentMethodsRouteImport } from './routes/more.payment-methods'
+import { Route as MoreSuppliersRouteImport } from './routes/more.suppliers'
+import { Route as MoreUserRolesRouteImport } from './routes/more.user-roles'
 import { Route as ReportsIndexRouteImport } from './routes/reports.index'
 import { Route as ReportsCashFlowRouteImport } from './routes/reports.cash-flow'
 import { Route as ReportsProfitLossRouteImport } from './routes/reports.profit-loss'
+import { Route as MoreCustomerIdRouteImport } from './routes/more.customer.$id'
+import { Route as MoreSupplierIdRouteImport } from './routes/more.supplier.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -90,6 +99,41 @@ const MoreSectionRoute = MoreSectionRouteImport.update({
   path: '/$section',
   getParentRoute: () => MoreRoute,
 } as any)
+const MoreBusinessProfileRoute = MoreBusinessProfileRouteImport.update({
+  id: '/business-profile',
+  path: '/business-profile',
+  getParentRoute: () => MoreRoute,
+} as any)
+const MoreCategoriesRoute = MoreCategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => MoreRoute,
+} as any)
+const MoreCustomersRoute = MoreCustomersRouteImport.update({
+  id: '/customers',
+  path: '/customers',
+  getParentRoute: () => MoreRoute,
+} as any)
+const MoreInventoryRoute = MoreInventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => MoreRoute,
+} as any)
+const MorePaymentMethodsRoute = MorePaymentMethodsRouteImport.update({
+  id: '/payment-methods',
+  path: '/payment-methods',
+  getParentRoute: () => MoreRoute,
+} as any)
+const MoreSuppliersRoute = MoreSuppliersRouteImport.update({
+  id: '/suppliers',
+  path: '/suppliers',
+  getParentRoute: () => MoreRoute,
+} as any)
+const MoreUserRolesRoute = MoreUserRolesRouteImport.update({
+  id: '/user-roles',
+  path: '/user-roles',
+  getParentRoute: () => MoreRoute,
+} as any)
 const ReportsIndexRoute = ReportsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -105,6 +149,16 @@ const ReportsProfitLossRoute = ReportsProfitLossRouteImport.update({
   path: '/profit-loss',
   getParentRoute: () => ReportsRoute,
 } as any)
+const MoreCustomerIdRoute = MoreCustomerIdRouteImport.update({
+  id: '/customer/$id',
+  path: '/customer/$id',
+  getParentRoute: () => MoreRoute,
+} as any)
+const MoreSupplierIdRoute = MoreSupplierIdRouteImport.update({
+  id: '/supplier/$id',
+  path: '/supplier/$id',
+  getParentRoute: () => MoreRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -118,10 +172,19 @@ export interface FileRoutesByFullPath {
   '/welcome': typeof WelcomeRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/more/$section': typeof MoreSectionRoute
+  '/more/business-profile': typeof MoreBusinessProfileRoute
+  '/more/categories': typeof MoreCategoriesRoute
+  '/more/customers': typeof MoreCustomersRoute
+  '/more/inventory': typeof MoreInventoryRoute
+  '/more/payment-methods': typeof MorePaymentMethodsRoute
+  '/more/suppliers': typeof MoreSuppliersRoute
+  '/more/user-roles': typeof MoreUserRolesRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/more/': typeof MoreIndexRoute
   '/reports/': typeof ReportsIndexRoute
+  '/more/customer/$id': typeof MoreCustomerIdRoute
+  '/more/supplier/$id': typeof MoreSupplierIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -133,10 +196,19 @@ export interface FileRoutesByTo {
   '/welcome': typeof WelcomeRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/more/$section': typeof MoreSectionRoute
+  '/more/business-profile': typeof MoreBusinessProfileRoute
+  '/more/categories': typeof MoreCategoriesRoute
+  '/more/customers': typeof MoreCustomersRoute
+  '/more/inventory': typeof MoreInventoryRoute
+  '/more/payment-methods': typeof MorePaymentMethodsRoute
+  '/more/suppliers': typeof MoreSuppliersRoute
+  '/more/user-roles': typeof MoreUserRolesRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/more': typeof MoreIndexRoute
   '/reports': typeof ReportsIndexRoute
+  '/more/customer/$id': typeof MoreCustomerIdRoute
+  '/more/supplier/$id': typeof MoreSupplierIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -152,10 +224,19 @@ export interface FileRoutesById {
   '/welcome': typeof WelcomeRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/more/$section': typeof MoreSectionRoute
+  '/more/business-profile': typeof MoreBusinessProfileRoute
+  '/more/categories': typeof MoreCategoriesRoute
+  '/more/customers': typeof MoreCustomersRoute
+  '/more/inventory': typeof MoreInventoryRoute
+  '/more/payment-methods': typeof MorePaymentMethodsRoute
+  '/more/suppliers': typeof MoreSuppliersRoute
+  '/more/user-roles': typeof MoreUserRolesRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/more/': typeof MoreIndexRoute
   '/reports/': typeof ReportsIndexRoute
+  '/more/customer/$id': typeof MoreCustomerIdRoute
+  '/more/supplier/$id': typeof MoreSupplierIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -171,10 +252,19 @@ export interface FileRouteTypes {
     | '/welcome'
     | '/profile'
     | '/more/$section'
+    | '/more/business-profile'
+    | '/more/categories'
+    | '/more/customers'
+    | '/more/inventory'
+    | '/more/payment-methods'
+    | '/more/suppliers'
+    | '/more/user-roles'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
     | '/more/'
     | '/reports/'
+    | '/more/customer/$id'
+    | '/more/supplier/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -186,10 +276,19 @@ export interface FileRouteTypes {
     | '/welcome'
     | '/profile'
     | '/more/$section'
+    | '/more/business-profile'
+    | '/more/categories'
+    | '/more/customers'
+    | '/more/inventory'
+    | '/more/payment-methods'
+    | '/more/suppliers'
+    | '/more/user-roles'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
     | '/more'
     | '/reports'
+    | '/more/customer/$id'
+    | '/more/supplier/$id'
   id:
     | '__root__'
     | '/'
@@ -204,10 +303,19 @@ export interface FileRouteTypes {
     | '/welcome'
     | '/_authenticated/profile'
     | '/more/$section'
+    | '/more/business-profile'
+    | '/more/categories'
+    | '/more/customers'
+    | '/more/inventory'
+    | '/more/payment-methods'
+    | '/more/suppliers'
+    | '/more/user-roles'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
     | '/more/'
     | '/reports/'
+    | '/more/customer/$id'
+    | '/more/supplier/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -316,6 +424,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoreSectionRouteImport
       parentRoute: typeof MoreRoute
     }
+    '/more/business-profile': {
+      id: '/more/business-profile'
+      path: '/business-profile'
+      fullPath: '/more/business-profile'
+      preLoaderRoute: typeof MoreBusinessProfileRouteImport
+      parentRoute: typeof MoreRoute
+    }
+    '/more/categories': {
+      id: '/more/categories'
+      path: '/categories'
+      fullPath: '/more/categories'
+      preLoaderRoute: typeof MoreCategoriesRouteImport
+      parentRoute: typeof MoreRoute
+    }
+    '/more/customers': {
+      id: '/more/customers'
+      path: '/customers'
+      fullPath: '/more/customers'
+      preLoaderRoute: typeof MoreCustomersRouteImport
+      parentRoute: typeof MoreRoute
+    }
+    '/more/inventory': {
+      id: '/more/inventory'
+      path: '/inventory'
+      fullPath: '/more/inventory'
+      preLoaderRoute: typeof MoreInventoryRouteImport
+      parentRoute: typeof MoreRoute
+    }
+    '/more/payment-methods': {
+      id: '/more/payment-methods'
+      path: '/payment-methods'
+      fullPath: '/more/payment-methods'
+      preLoaderRoute: typeof MorePaymentMethodsRouteImport
+      parentRoute: typeof MoreRoute
+    }
+    '/more/suppliers': {
+      id: '/more/suppliers'
+      path: '/suppliers'
+      fullPath: '/more/suppliers'
+      preLoaderRoute: typeof MoreSuppliersRouteImport
+      parentRoute: typeof MoreRoute
+    }
+    '/more/user-roles': {
+      id: '/more/user-roles'
+      path: '/user-roles'
+      fullPath: '/more/user-roles'
+      preLoaderRoute: typeof MoreUserRolesRouteImport
+      parentRoute: typeof MoreRoute
+    }
     '/reports/': {
       id: '/reports/'
       path: '/'
@@ -337,6 +494,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReportsProfitLossRouteImport
       parentRoute: typeof ReportsRoute
     }
+    '/more/customer/$id': {
+      id: '/more/customer/$id'
+      path: '/customer/$id'
+      fullPath: '/more/customer/$id'
+      preLoaderRoute: typeof MoreCustomerIdRouteImport
+      parentRoute: typeof MoreRoute
+    }
+    '/more/supplier/$id': {
+      id: '/more/supplier/$id'
+      path: '/supplier/$id'
+      fullPath: '/more/supplier/$id'
+      preLoaderRoute: typeof MoreSupplierIdRouteImport
+      parentRoute: typeof MoreRoute
+    }
   }
 }
 
@@ -353,12 +524,30 @@ const AuthenticatedRouteRouteWithChildren =
 
 interface MoreRouteChildren {
   MoreSectionRoute: typeof MoreSectionRoute
+  MoreBusinessProfileRoute: typeof MoreBusinessProfileRoute
+  MoreCategoriesRoute: typeof MoreCategoriesRoute
+  MoreCustomersRoute: typeof MoreCustomersRoute
+  MoreInventoryRoute: typeof MoreInventoryRoute
+  MorePaymentMethodsRoute: typeof MorePaymentMethodsRoute
+  MoreSuppliersRoute: typeof MoreSuppliersRoute
+  MoreUserRolesRoute: typeof MoreUserRolesRoute
   MoreIndexRoute: typeof MoreIndexRoute
+  MoreCustomerIdRoute: typeof MoreCustomerIdRoute
+  MoreSupplierIdRoute: typeof MoreSupplierIdRoute
 }
 
 const MoreRouteChildren: MoreRouteChildren = {
   MoreSectionRoute: MoreSectionRoute,
+  MoreBusinessProfileRoute: MoreBusinessProfileRoute,
+  MoreCategoriesRoute: MoreCategoriesRoute,
+  MoreCustomersRoute: MoreCustomersRoute,
+  MoreInventoryRoute: MoreInventoryRoute,
+  MorePaymentMethodsRoute: MorePaymentMethodsRoute,
+  MoreSuppliersRoute: MoreSuppliersRoute,
+  MoreUserRolesRoute: MoreUserRolesRoute,
   MoreIndexRoute: MoreIndexRoute,
+  MoreCustomerIdRoute: MoreCustomerIdRoute,
+  MoreSupplierIdRoute: MoreSupplierIdRoute,
 }
 
 const MoreRouteWithChildren = MoreRoute._addFileChildren(MoreRouteChildren)
