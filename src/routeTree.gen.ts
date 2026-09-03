@@ -26,6 +26,7 @@ import { Route as MoreBusinessProfileRouteImport } from './routes/more.business-
 import { Route as MoreCustomersRouteImport } from './routes/more.customers'
 import { Route as MoreInventoryRouteImport } from './routes/more.inventory'
 import { Route as MoreSuppliersRouteImport } from './routes/more.suppliers'
+import { Route as MoreUserRolesRouteImport } from './routes/more.user-roles'
 import { Route as ReportsIndexRouteImport } from './routes/reports.index'
 import { Route as ReportsCashFlowRouteImport } from './routes/reports.cash-flow'
 import { Route as ReportsProfitLossRouteImport } from './routes/reports.profit-loss'
@@ -116,6 +117,11 @@ const MoreSuppliersRoute = MoreSuppliersRouteImport.update({
   path: '/suppliers',
   getParentRoute: () => MoreRoute,
 } as any)
+const MoreUserRolesRoute = MoreUserRolesRouteImport.update({
+  id: '/user-roles',
+  path: '/user-roles',
+  getParentRoute: () => MoreRoute,
+} as any)
 const ReportsIndexRoute = ReportsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -158,6 +164,7 @@ export interface FileRoutesByFullPath {
   '/more/customers': typeof MoreCustomersRoute
   '/more/inventory': typeof MoreInventoryRoute
   '/more/suppliers': typeof MoreSuppliersRoute
+  '/more/user-roles': typeof MoreUserRolesRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/more/': typeof MoreIndexRoute
@@ -179,6 +186,7 @@ export interface FileRoutesByTo {
   '/more/customers': typeof MoreCustomersRoute
   '/more/inventory': typeof MoreInventoryRoute
   '/more/suppliers': typeof MoreSuppliersRoute
+  '/more/user-roles': typeof MoreUserRolesRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/more': typeof MoreIndexRoute
@@ -204,6 +212,7 @@ export interface FileRoutesById {
   '/more/customers': typeof MoreCustomersRoute
   '/more/inventory': typeof MoreInventoryRoute
   '/more/suppliers': typeof MoreSuppliersRoute
+  '/more/user-roles': typeof MoreUserRolesRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
   '/reports/profit-loss': typeof ReportsProfitLossRoute
   '/more/': typeof MoreIndexRoute
@@ -229,6 +238,7 @@ export interface FileRouteTypes {
     | '/more/customers'
     | '/more/inventory'
     | '/more/suppliers'
+    | '/more/user-roles'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
     | '/more/'
@@ -250,6 +260,7 @@ export interface FileRouteTypes {
     | '/more/customers'
     | '/more/inventory'
     | '/more/suppliers'
+    | '/more/user-roles'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
     | '/more'
@@ -274,6 +285,7 @@ export interface FileRouteTypes {
     | '/more/customers'
     | '/more/inventory'
     | '/more/suppliers'
+    | '/more/user-roles'
     | '/reports/cash-flow'
     | '/reports/profit-loss'
     | '/more/'
@@ -416,6 +428,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoreSuppliersRouteImport
       parentRoute: typeof MoreRoute
     }
+    '/more/user-roles': {
+      id: '/more/user-roles'
+      path: '/user-roles'
+      fullPath: '/more/user-roles'
+      preLoaderRoute: typeof MoreUserRolesRouteImport
+      parentRoute: typeof MoreRoute
+    }
     '/reports/': {
       id: '/reports/'
       path: '/'
@@ -471,6 +490,7 @@ interface MoreRouteChildren {
   MoreCustomersRoute: typeof MoreCustomersRoute
   MoreInventoryRoute: typeof MoreInventoryRoute
   MoreSuppliersRoute: typeof MoreSuppliersRoute
+  MoreUserRolesRoute: typeof MoreUserRolesRoute
   MoreIndexRoute: typeof MoreIndexRoute
   MoreCustomerIdRoute: typeof MoreCustomerIdRoute
   MoreSupplierIdRoute: typeof MoreSupplierIdRoute
@@ -482,6 +502,7 @@ const MoreRouteChildren: MoreRouteChildren = {
   MoreCustomersRoute: MoreCustomersRoute,
   MoreInventoryRoute: MoreInventoryRoute,
   MoreSuppliersRoute: MoreSuppliersRoute,
+  MoreUserRolesRoute: MoreUserRolesRoute,
   MoreIndexRoute: MoreIndexRoute,
   MoreCustomerIdRoute: MoreCustomerIdRoute,
   MoreSupplierIdRoute: MoreSupplierIdRoute,

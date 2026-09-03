@@ -95,7 +95,7 @@ function UserRolesPage() {
           <PrimaryButton
             onClick={() => {
               if (!email.trim()) return;
-              setTeam((prev) => [...prev, { id: `${Date.now()}`, name: email.split("@")[0], email, role }]);
+              setTeam((prev) => [...prev, { id: `${Date.now()}`, name: email.split("@")[0] ?? email, email, role }]);
               setEmail("");
               setInviting(false);
               toast.success("Invitation sent");
