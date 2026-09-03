@@ -22,6 +22,7 @@ import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as MoreIndexRouteImport } from './routes/more.index'
 import { Route as MoreSectionRouteImport } from './routes/more.$section'
+import { Route as MoreBusinessProfileRouteImport } from './routes/more.business-profile'
 import { Route as MoreCustomersRouteImport } from './routes/more.customers'
 import { Route as MoreInventoryRouteImport } from './routes/more.inventory'
 import { Route as MoreSuppliersRouteImport } from './routes/more.suppliers'
@@ -95,6 +96,11 @@ const MoreSectionRoute = MoreSectionRouteImport.update({
   path: '/$section',
   getParentRoute: () => MoreRoute,
 } as any)
+const MoreBusinessProfileRoute = MoreBusinessProfileRouteImport.update({
+  id: '/business-profile',
+  path: '/business-profile',
+  getParentRoute: () => MoreRoute,
+} as any)
 const MoreCustomersRoute = MoreCustomersRouteImport.update({
   id: '/customers',
   path: '/customers',
@@ -148,6 +154,7 @@ export interface FileRoutesByFullPath {
   '/welcome': typeof WelcomeRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/more/$section': typeof MoreSectionRoute
+  '/more/business-profile': typeof MoreBusinessProfileRoute
   '/more/customers': typeof MoreCustomersRoute
   '/more/inventory': typeof MoreInventoryRoute
   '/more/suppliers': typeof MoreSuppliersRoute
@@ -168,6 +175,7 @@ export interface FileRoutesByTo {
   '/welcome': typeof WelcomeRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/more/$section': typeof MoreSectionRoute
+  '/more/business-profile': typeof MoreBusinessProfileRoute
   '/more/customers': typeof MoreCustomersRoute
   '/more/inventory': typeof MoreInventoryRoute
   '/more/suppliers': typeof MoreSuppliersRoute
@@ -192,6 +200,7 @@ export interface FileRoutesById {
   '/welcome': typeof WelcomeRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/more/$section': typeof MoreSectionRoute
+  '/more/business-profile': typeof MoreBusinessProfileRoute
   '/more/customers': typeof MoreCustomersRoute
   '/more/inventory': typeof MoreInventoryRoute
   '/more/suppliers': typeof MoreSuppliersRoute
@@ -216,6 +225,7 @@ export interface FileRouteTypes {
     | '/welcome'
     | '/profile'
     | '/more/$section'
+    | '/more/business-profile'
     | '/more/customers'
     | '/more/inventory'
     | '/more/suppliers'
@@ -236,6 +246,7 @@ export interface FileRouteTypes {
     | '/welcome'
     | '/profile'
     | '/more/$section'
+    | '/more/business-profile'
     | '/more/customers'
     | '/more/inventory'
     | '/more/suppliers'
@@ -259,6 +270,7 @@ export interface FileRouteTypes {
     | '/welcome'
     | '/_authenticated/profile'
     | '/more/$section'
+    | '/more/business-profile'
     | '/more/customers'
     | '/more/inventory'
     | '/more/suppliers'
@@ -376,6 +388,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoreSectionRouteImport
       parentRoute: typeof MoreRoute
     }
+    '/more/business-profile': {
+      id: '/more/business-profile'
+      path: '/business-profile'
+      fullPath: '/more/business-profile'
+      preLoaderRoute: typeof MoreBusinessProfileRouteImport
+      parentRoute: typeof MoreRoute
+    }
     '/more/customers': {
       id: '/more/customers'
       path: '/customers'
@@ -448,6 +467,7 @@ const AuthenticatedRouteRouteWithChildren =
 
 interface MoreRouteChildren {
   MoreSectionRoute: typeof MoreSectionRoute
+  MoreBusinessProfileRoute: typeof MoreBusinessProfileRoute
   MoreCustomersRoute: typeof MoreCustomersRoute
   MoreInventoryRoute: typeof MoreInventoryRoute
   MoreSuppliersRoute: typeof MoreSuppliersRoute
@@ -458,6 +478,7 @@ interface MoreRouteChildren {
 
 const MoreRouteChildren: MoreRouteChildren = {
   MoreSectionRoute: MoreSectionRoute,
+  MoreBusinessProfileRoute: MoreBusinessProfileRoute,
   MoreCustomersRoute: MoreCustomersRoute,
   MoreInventoryRoute: MoreInventoryRoute,
   MoreSuppliersRoute: MoreSuppliersRoute,
