@@ -133,9 +133,9 @@ function MorePage() {
                 return (
                   <Link
                     key={item.slug}
-                    to="/more/$section"
-                    params={{ section: item.slug }}
-                    className="grid w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 border-b px-4 py-3 text-left last:border-0 hover:bg-blue-50"
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    to={`/more/${item.slug}` as any}
+                    className="grid w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 border-b px-4 py-3 text-left transition-colors last:border-0 hover:bg-blue-50 active:bg-blue-50 active:opacity-80"
                   >
                     <Icon className="h-5 w-5 shrink-0 text-blue-900" aria-hidden />
                     <span className="truncate text-sm text-charcoal-800">{item.label}</span>

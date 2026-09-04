@@ -21,12 +21,15 @@ import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as MoreIndexRouteImport } from './routes/more.index'
-import { Route as MoreSectionRouteImport } from './routes/more.$section'
 import { Route as MoreBusinessProfileRouteImport } from './routes/more.business-profile'
 import { Route as MoreCategoriesRouteImport } from './routes/more.categories'
 import { Route as MoreCustomersRouteImport } from './routes/more.customers'
+import { Route as MoreExportDataRouteImport } from './routes/more.export-data'
+import { Route as MoreHelpSupportRouteImport } from './routes/more.help-support'
 import { Route as MoreInventoryRouteImport } from './routes/more.inventory'
+import { Route as MoreNotificationsRouteImport } from './routes/more.notifications'
 import { Route as MorePaymentMethodsRouteImport } from './routes/more.payment-methods'
+import { Route as MoreSettingsRouteImport } from './routes/more.settings'
 import { Route as MoreSuppliersRouteImport } from './routes/more.suppliers'
 import { Route as MoreUserRolesRouteImport } from './routes/more.user-roles'
 import { Route as ReportsIndexRouteImport } from './routes/reports.index'
@@ -94,11 +97,6 @@ const MoreIndexRoute = MoreIndexRouteImport.update({
   path: '/',
   getParentRoute: () => MoreRoute,
 } as any)
-const MoreSectionRoute = MoreSectionRouteImport.update({
-  id: '/$section',
-  path: '/$section',
-  getParentRoute: () => MoreRoute,
-} as any)
 const MoreBusinessProfileRoute = MoreBusinessProfileRouteImport.update({
   id: '/business-profile',
   path: '/business-profile',
@@ -114,14 +112,34 @@ const MoreCustomersRoute = MoreCustomersRouteImport.update({
   path: '/customers',
   getParentRoute: () => MoreRoute,
 } as any)
+const MoreExportDataRoute = MoreExportDataRouteImport.update({
+  id: '/export-data',
+  path: '/export-data',
+  getParentRoute: () => MoreRoute,
+} as any)
+const MoreHelpSupportRoute = MoreHelpSupportRouteImport.update({
+  id: '/help-support',
+  path: '/help-support',
+  getParentRoute: () => MoreRoute,
+} as any)
 const MoreInventoryRoute = MoreInventoryRouteImport.update({
   id: '/inventory',
   path: '/inventory',
   getParentRoute: () => MoreRoute,
 } as any)
+const MoreNotificationsRoute = MoreNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => MoreRoute,
+} as any)
 const MorePaymentMethodsRoute = MorePaymentMethodsRouteImport.update({
   id: '/payment-methods',
   path: '/payment-methods',
+  getParentRoute: () => MoreRoute,
+} as any)
+const MoreSettingsRoute = MoreSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => MoreRoute,
 } as any)
 const MoreSuppliersRoute = MoreSuppliersRouteImport.update({
@@ -171,12 +189,15 @@ export interface FileRoutesByFullPath {
   '/transactions': typeof TransactionsRoute
   '/welcome': typeof WelcomeRoute
   '/profile': typeof AuthenticatedProfileRoute
-  '/more/$section': typeof MoreSectionRoute
   '/more/business-profile': typeof MoreBusinessProfileRoute
   '/more/categories': typeof MoreCategoriesRoute
   '/more/customers': typeof MoreCustomersRoute
+  '/more/export-data': typeof MoreExportDataRoute
+  '/more/help-support': typeof MoreHelpSupportRoute
   '/more/inventory': typeof MoreInventoryRoute
+  '/more/notifications': typeof MoreNotificationsRoute
   '/more/payment-methods': typeof MorePaymentMethodsRoute
+  '/more/settings': typeof MoreSettingsRoute
   '/more/suppliers': typeof MoreSuppliersRoute
   '/more/user-roles': typeof MoreUserRolesRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
@@ -195,12 +216,15 @@ export interface FileRoutesByTo {
   '/transactions': typeof TransactionsRoute
   '/welcome': typeof WelcomeRoute
   '/profile': typeof AuthenticatedProfileRoute
-  '/more/$section': typeof MoreSectionRoute
   '/more/business-profile': typeof MoreBusinessProfileRoute
   '/more/categories': typeof MoreCategoriesRoute
   '/more/customers': typeof MoreCustomersRoute
+  '/more/export-data': typeof MoreExportDataRoute
+  '/more/help-support': typeof MoreHelpSupportRoute
   '/more/inventory': typeof MoreInventoryRoute
+  '/more/notifications': typeof MoreNotificationsRoute
   '/more/payment-methods': typeof MorePaymentMethodsRoute
+  '/more/settings': typeof MoreSettingsRoute
   '/more/suppliers': typeof MoreSuppliersRoute
   '/more/user-roles': typeof MoreUserRolesRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
@@ -223,12 +247,15 @@ export interface FileRoutesById {
   '/transactions': typeof TransactionsRoute
   '/welcome': typeof WelcomeRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
-  '/more/$section': typeof MoreSectionRoute
   '/more/business-profile': typeof MoreBusinessProfileRoute
   '/more/categories': typeof MoreCategoriesRoute
   '/more/customers': typeof MoreCustomersRoute
+  '/more/export-data': typeof MoreExportDataRoute
+  '/more/help-support': typeof MoreHelpSupportRoute
   '/more/inventory': typeof MoreInventoryRoute
+  '/more/notifications': typeof MoreNotificationsRoute
   '/more/payment-methods': typeof MorePaymentMethodsRoute
+  '/more/settings': typeof MoreSettingsRoute
   '/more/suppliers': typeof MoreSuppliersRoute
   '/more/user-roles': typeof MoreUserRolesRoute
   '/reports/cash-flow': typeof ReportsCashFlowRoute
@@ -251,12 +278,15 @@ export interface FileRouteTypes {
     | '/transactions'
     | '/welcome'
     | '/profile'
-    | '/more/$section'
     | '/more/business-profile'
     | '/more/categories'
     | '/more/customers'
+    | '/more/export-data'
+    | '/more/help-support'
     | '/more/inventory'
+    | '/more/notifications'
     | '/more/payment-methods'
+    | '/more/settings'
     | '/more/suppliers'
     | '/more/user-roles'
     | '/reports/cash-flow'
@@ -275,12 +305,15 @@ export interface FileRouteTypes {
     | '/transactions'
     | '/welcome'
     | '/profile'
-    | '/more/$section'
     | '/more/business-profile'
     | '/more/categories'
     | '/more/customers'
+    | '/more/export-data'
+    | '/more/help-support'
     | '/more/inventory'
+    | '/more/notifications'
     | '/more/payment-methods'
+    | '/more/settings'
     | '/more/suppliers'
     | '/more/user-roles'
     | '/reports/cash-flow'
@@ -302,12 +335,15 @@ export interface FileRouteTypes {
     | '/transactions'
     | '/welcome'
     | '/_authenticated/profile'
-    | '/more/$section'
     | '/more/business-profile'
     | '/more/categories'
     | '/more/customers'
+    | '/more/export-data'
+    | '/more/help-support'
     | '/more/inventory'
+    | '/more/notifications'
     | '/more/payment-methods'
+    | '/more/settings'
     | '/more/suppliers'
     | '/more/user-roles'
     | '/reports/cash-flow'
@@ -417,13 +453,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoreIndexRouteImport
       parentRoute: typeof MoreRoute
     }
-    '/more/$section': {
-      id: '/more/$section'
-      path: '/$section'
-      fullPath: '/more/$section'
-      preLoaderRoute: typeof MoreSectionRouteImport
-      parentRoute: typeof MoreRoute
-    }
     '/more/business-profile': {
       id: '/more/business-profile'
       path: '/business-profile'
@@ -445,6 +474,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoreCustomersRouteImport
       parentRoute: typeof MoreRoute
     }
+    '/more/export-data': {
+      id: '/more/export-data'
+      path: '/export-data'
+      fullPath: '/more/export-data'
+      preLoaderRoute: typeof MoreExportDataRouteImport
+      parentRoute: typeof MoreRoute
+    }
+    '/more/help-support': {
+      id: '/more/help-support'
+      path: '/help-support'
+      fullPath: '/more/help-support'
+      preLoaderRoute: typeof MoreHelpSupportRouteImport
+      parentRoute: typeof MoreRoute
+    }
     '/more/inventory': {
       id: '/more/inventory'
       path: '/inventory'
@@ -452,11 +495,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoreInventoryRouteImport
       parentRoute: typeof MoreRoute
     }
+    '/more/notifications': {
+      id: '/more/notifications'
+      path: '/notifications'
+      fullPath: '/more/notifications'
+      preLoaderRoute: typeof MoreNotificationsRouteImport
+      parentRoute: typeof MoreRoute
+    }
     '/more/payment-methods': {
       id: '/more/payment-methods'
       path: '/payment-methods'
       fullPath: '/more/payment-methods'
       preLoaderRoute: typeof MorePaymentMethodsRouteImport
+      parentRoute: typeof MoreRoute
+    }
+    '/more/settings': {
+      id: '/more/settings'
+      path: '/settings'
+      fullPath: '/more/settings'
+      preLoaderRoute: typeof MoreSettingsRouteImport
       parentRoute: typeof MoreRoute
     }
     '/more/suppliers': {
@@ -523,12 +580,15 @@ const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface MoreRouteChildren {
-  MoreSectionRoute: typeof MoreSectionRoute
   MoreBusinessProfileRoute: typeof MoreBusinessProfileRoute
   MoreCategoriesRoute: typeof MoreCategoriesRoute
   MoreCustomersRoute: typeof MoreCustomersRoute
+  MoreExportDataRoute: typeof MoreExportDataRoute
+  MoreHelpSupportRoute: typeof MoreHelpSupportRoute
   MoreInventoryRoute: typeof MoreInventoryRoute
+  MoreNotificationsRoute: typeof MoreNotificationsRoute
   MorePaymentMethodsRoute: typeof MorePaymentMethodsRoute
+  MoreSettingsRoute: typeof MoreSettingsRoute
   MoreSuppliersRoute: typeof MoreSuppliersRoute
   MoreUserRolesRoute: typeof MoreUserRolesRoute
   MoreIndexRoute: typeof MoreIndexRoute
@@ -537,12 +597,15 @@ interface MoreRouteChildren {
 }
 
 const MoreRouteChildren: MoreRouteChildren = {
-  MoreSectionRoute: MoreSectionRoute,
   MoreBusinessProfileRoute: MoreBusinessProfileRoute,
   MoreCategoriesRoute: MoreCategoriesRoute,
   MoreCustomersRoute: MoreCustomersRoute,
+  MoreExportDataRoute: MoreExportDataRoute,
+  MoreHelpSupportRoute: MoreHelpSupportRoute,
   MoreInventoryRoute: MoreInventoryRoute,
+  MoreNotificationsRoute: MoreNotificationsRoute,
   MorePaymentMethodsRoute: MorePaymentMethodsRoute,
+  MoreSettingsRoute: MoreSettingsRoute,
   MoreSuppliersRoute: MoreSuppliersRoute,
   MoreUserRolesRoute: MoreUserRolesRoute,
   MoreIndexRoute: MoreIndexRoute,
