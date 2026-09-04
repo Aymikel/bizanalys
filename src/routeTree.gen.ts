@@ -26,6 +26,7 @@ import { Route as MoreBusinessProfileRouteImport } from './routes/more.business-
 import { Route as MoreCategoriesRouteImport } from './routes/more.categories'
 import { Route as MoreCustomersRouteImport } from './routes/more.customers'
 import { Route as MoreExportDataRouteImport } from './routes/more.export-data'
+import { Route as MoreHelpSupportRouteImport } from './routes/more.help-support'
 import { Route as MoreInventoryRouteImport } from './routes/more.inventory'
 import { Route as MoreNotificationsRouteImport } from './routes/more.notifications'
 import { Route as MorePaymentMethodsRouteImport } from './routes/more.payment-methods'
@@ -122,6 +123,11 @@ const MoreExportDataRoute = MoreExportDataRouteImport.update({
   path: '/export-data',
   getParentRoute: () => MoreRoute,
 } as any)
+const MoreHelpSupportRoute = MoreHelpSupportRouteImport.update({
+  id: '/help-support',
+  path: '/help-support',
+  getParentRoute: () => MoreRoute,
+} as any)
 const MoreInventoryRoute = MoreInventoryRouteImport.update({
   id: '/inventory',
   path: '/inventory',
@@ -194,6 +200,7 @@ export interface FileRoutesByFullPath {
   '/more/categories': typeof MoreCategoriesRoute
   '/more/customers': typeof MoreCustomersRoute
   '/more/export-data': typeof MoreExportDataRoute
+  '/more/help-support': typeof MoreHelpSupportRoute
   '/more/inventory': typeof MoreInventoryRoute
   '/more/notifications': typeof MoreNotificationsRoute
   '/more/payment-methods': typeof MorePaymentMethodsRoute
@@ -221,6 +228,7 @@ export interface FileRoutesByTo {
   '/more/categories': typeof MoreCategoriesRoute
   '/more/customers': typeof MoreCustomersRoute
   '/more/export-data': typeof MoreExportDataRoute
+  '/more/help-support': typeof MoreHelpSupportRoute
   '/more/inventory': typeof MoreInventoryRoute
   '/more/notifications': typeof MoreNotificationsRoute
   '/more/payment-methods': typeof MorePaymentMethodsRoute
@@ -252,6 +260,7 @@ export interface FileRoutesById {
   '/more/categories': typeof MoreCategoriesRoute
   '/more/customers': typeof MoreCustomersRoute
   '/more/export-data': typeof MoreExportDataRoute
+  '/more/help-support': typeof MoreHelpSupportRoute
   '/more/inventory': typeof MoreInventoryRoute
   '/more/notifications': typeof MoreNotificationsRoute
   '/more/payment-methods': typeof MorePaymentMethodsRoute
@@ -283,6 +292,7 @@ export interface FileRouteTypes {
     | '/more/categories'
     | '/more/customers'
     | '/more/export-data'
+    | '/more/help-support'
     | '/more/inventory'
     | '/more/notifications'
     | '/more/payment-methods'
@@ -310,6 +320,7 @@ export interface FileRouteTypes {
     | '/more/categories'
     | '/more/customers'
     | '/more/export-data'
+    | '/more/help-support'
     | '/more/inventory'
     | '/more/notifications'
     | '/more/payment-methods'
@@ -340,6 +351,7 @@ export interface FileRouteTypes {
     | '/more/categories'
     | '/more/customers'
     | '/more/export-data'
+    | '/more/help-support'
     | '/more/inventory'
     | '/more/notifications'
     | '/more/payment-methods'
@@ -488,6 +500,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoreExportDataRouteImport
       parentRoute: typeof MoreRoute
     }
+    '/more/help-support': {
+      id: '/more/help-support'
+      path: '/help-support'
+      fullPath: '/more/help-support'
+      preLoaderRoute: typeof MoreHelpSupportRouteImport
+      parentRoute: typeof MoreRoute
+    }
     '/more/inventory': {
       id: '/more/inventory'
       path: '/inventory'
@@ -585,6 +604,7 @@ interface MoreRouteChildren {
   MoreCategoriesRoute: typeof MoreCategoriesRoute
   MoreCustomersRoute: typeof MoreCustomersRoute
   MoreExportDataRoute: typeof MoreExportDataRoute
+  MoreHelpSupportRoute: typeof MoreHelpSupportRoute
   MoreInventoryRoute: typeof MoreInventoryRoute
   MoreNotificationsRoute: typeof MoreNotificationsRoute
   MorePaymentMethodsRoute: typeof MorePaymentMethodsRoute
@@ -602,6 +622,7 @@ const MoreRouteChildren: MoreRouteChildren = {
   MoreCategoriesRoute: MoreCategoriesRoute,
   MoreCustomersRoute: MoreCustomersRoute,
   MoreExportDataRoute: MoreExportDataRoute,
+  MoreHelpSupportRoute: MoreHelpSupportRoute,
   MoreInventoryRoute: MoreInventoryRoute,
   MoreNotificationsRoute: MoreNotificationsRoute,
   MorePaymentMethodsRoute: MorePaymentMethodsRoute,
