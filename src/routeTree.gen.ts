@@ -26,6 +26,7 @@ import { Route as MoreBusinessProfileRouteImport } from './routes/more.business-
 import { Route as MoreCategoriesRouteImport } from './routes/more.categories'
 import { Route as MoreCustomersRouteImport } from './routes/more.customers'
 import { Route as MoreInventoryRouteImport } from './routes/more.inventory'
+import { Route as MoreNotificationsRouteImport } from './routes/more.notifications'
 import { Route as MorePaymentMethodsRouteImport } from './routes/more.payment-methods'
 import { Route as MoreSuppliersRouteImport } from './routes/more.suppliers'
 import { Route as MoreUserRolesRouteImport } from './routes/more.user-roles'
@@ -119,6 +120,11 @@ const MoreInventoryRoute = MoreInventoryRouteImport.update({
   path: '/inventory',
   getParentRoute: () => MoreRoute,
 } as any)
+const MoreNotificationsRoute = MoreNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => MoreRoute,
+} as any)
 const MorePaymentMethodsRoute = MorePaymentMethodsRouteImport.update({
   id: '/payment-methods',
   path: '/payment-methods',
@@ -176,6 +182,7 @@ export interface FileRoutesByFullPath {
   '/more/categories': typeof MoreCategoriesRoute
   '/more/customers': typeof MoreCustomersRoute
   '/more/inventory': typeof MoreInventoryRoute
+  '/more/notifications': typeof MoreNotificationsRoute
   '/more/payment-methods': typeof MorePaymentMethodsRoute
   '/more/suppliers': typeof MoreSuppliersRoute
   '/more/user-roles': typeof MoreUserRolesRoute
@@ -200,6 +207,7 @@ export interface FileRoutesByTo {
   '/more/categories': typeof MoreCategoriesRoute
   '/more/customers': typeof MoreCustomersRoute
   '/more/inventory': typeof MoreInventoryRoute
+  '/more/notifications': typeof MoreNotificationsRoute
   '/more/payment-methods': typeof MorePaymentMethodsRoute
   '/more/suppliers': typeof MoreSuppliersRoute
   '/more/user-roles': typeof MoreUserRolesRoute
@@ -228,6 +236,7 @@ export interface FileRoutesById {
   '/more/categories': typeof MoreCategoriesRoute
   '/more/customers': typeof MoreCustomersRoute
   '/more/inventory': typeof MoreInventoryRoute
+  '/more/notifications': typeof MoreNotificationsRoute
   '/more/payment-methods': typeof MorePaymentMethodsRoute
   '/more/suppliers': typeof MoreSuppliersRoute
   '/more/user-roles': typeof MoreUserRolesRoute
@@ -256,6 +265,7 @@ export interface FileRouteTypes {
     | '/more/categories'
     | '/more/customers'
     | '/more/inventory'
+    | '/more/notifications'
     | '/more/payment-methods'
     | '/more/suppliers'
     | '/more/user-roles'
@@ -280,6 +290,7 @@ export interface FileRouteTypes {
     | '/more/categories'
     | '/more/customers'
     | '/more/inventory'
+    | '/more/notifications'
     | '/more/payment-methods'
     | '/more/suppliers'
     | '/more/user-roles'
@@ -307,6 +318,7 @@ export interface FileRouteTypes {
     | '/more/categories'
     | '/more/customers'
     | '/more/inventory'
+    | '/more/notifications'
     | '/more/payment-methods'
     | '/more/suppliers'
     | '/more/user-roles'
@@ -452,6 +464,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoreInventoryRouteImport
       parentRoute: typeof MoreRoute
     }
+    '/more/notifications': {
+      id: '/more/notifications'
+      path: '/notifications'
+      fullPath: '/more/notifications'
+      preLoaderRoute: typeof MoreNotificationsRouteImport
+      parentRoute: typeof MoreRoute
+    }
     '/more/payment-methods': {
       id: '/more/payment-methods'
       path: '/payment-methods'
@@ -528,6 +547,7 @@ interface MoreRouteChildren {
   MoreCategoriesRoute: typeof MoreCategoriesRoute
   MoreCustomersRoute: typeof MoreCustomersRoute
   MoreInventoryRoute: typeof MoreInventoryRoute
+  MoreNotificationsRoute: typeof MoreNotificationsRoute
   MorePaymentMethodsRoute: typeof MorePaymentMethodsRoute
   MoreSuppliersRoute: typeof MoreSuppliersRoute
   MoreUserRolesRoute: typeof MoreUserRolesRoute
@@ -542,6 +562,7 @@ const MoreRouteChildren: MoreRouteChildren = {
   MoreCategoriesRoute: MoreCategoriesRoute,
   MoreCustomersRoute: MoreCustomersRoute,
   MoreInventoryRoute: MoreInventoryRoute,
+  MoreNotificationsRoute: MoreNotificationsRoute,
   MorePaymentMethodsRoute: MorePaymentMethodsRoute,
   MoreSuppliersRoute: MoreSuppliersRoute,
   MoreUserRolesRoute: MoreUserRolesRoute,
